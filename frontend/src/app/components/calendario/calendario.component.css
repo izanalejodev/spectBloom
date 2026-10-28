@@ -1,0 +1,165 @@
+/* ── Toolbar principal ── */
+.fc .fc-toolbar.fc-header-toolbar {
+  background-color: #FFF9F4;
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1.5px solid #EAE0D8;
+  margin-bottom: 0 !important;
+}
+
+/* ── Título del mes ── */
+.fc .fc-toolbar-title {
+  font-size: 2.5rem !important;
+  font-weight: 800 !important;
+  color: #3D2B1F !important;
+  text-transform: capitalize;
+  letter-spacing: -0.01em;
+}
+
+/* ── Botones prev / next / today: base ── */
+.fc .fc-button,
+.fc .fc-button-primary {
+  background-color: white !important;
+  color: #3D2B1F !important;
+  border: 1.5px solid #EAE0D8 !important;
+  border-radius: 9999px !important;
+  padding: 0.3rem 1rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+/* ── Hover botones ── */
+.fc .fc-button:hover,
+.fc .fc-button-primary:hover {
+  background-color: #EAE0D8 !important;
+  border-color: #EAE0D8 !important;
+  color: #3D2B1F !important;
+}
+
+/* ── Botón today y activo ── */
+.fc .fc-today-button,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #6181ff !important;
+  color: white !important;
+  border-color: #6181ff !important;
+}
+
+.fc .fc-today-button:hover {
+  background-color: #4f6ee0 !important;
+  border-color: #4f6ee0 !important;
+}
+
+/* ── Botón deshabilitado ── */
+.fc .fc-button:disabled {
+  background-color: #FFF9F4 !important;
+  color: #EAE0D8 !important;
+  border-color: #EAE0D8 !important;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ── Cabecera días de la semana ── */
+.fc .fc-col-header-cell {
+  background-color: #FFF9F4;
+  border-bottom: 1.5px solid #EAE0D8;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  color: #7A6458 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none !important;
+  padding: 0.5rem 0;
+}
+
+/* ── Números de día ── */
+.fc .fc-daygrid-day-number {
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  color: #3D2B1F !important;
+  text-decoration: none !important;
+  padding: 0.35rem 0.5rem;
+}
+
+/* ── Día actual ── */
+.fc .fc-day-today {
+  background-color: #6181ff32 !important;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  background-color: #6181ff;
+  color: white !important;
+  border-radius: 9999px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800 !important;
+  font-size: 0.75rem !important;
+  padding: 0 !important;
+  margin: 4px;
+  line-height: 1;
+}
+
+/* ── Días de otros meses ── */
+.fc .fc-day-other .fc-daygrid-day-number {
+  color: #6181ff72 !important;
+}
+
+/* ── Eventos ── */
+.fc .fc-event {
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0 0.5rem !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition: background 0.15s;
+  /* SIN background-color aquí — lo pone FullCalendar dinámicamente */
+}
+
+.fc .fc-event:hover {
+  opacity: 0.85;  /* hover genérico sin color fijo */
+}
+
+.fc .fc-event .fc-event-title,
+.fc .fc-event .fc-event-time {
+  color: white !important;
+}
+
+/* ── Popover "+N more" ── */
+.fc .fc-popover {
+  background-color: white;
+  border: 1.5px solid #EAE0D8 !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important;
+  overflow: hidden;
+}
+
+.fc .fc-popover-header {
+  background-color: #FFF9F4 !important;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #7A6458;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1.5px solid #EAE0D8;
+}
+
+/* ── Enlace "+N more" ── */
+.fc .fc-daygrid-more-link {
+  color: #6181ff !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.fc .fc-daygrid-more-link:hover {
+  color: #4f6ee0 !important;
+}

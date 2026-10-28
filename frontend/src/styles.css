@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+  font-family: 'Baloo 2', sans-serif !important;
+  background-color: #FFF9F4 !important;
+}
+}

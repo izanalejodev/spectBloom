@@ -1,0 +1,199 @@
+<!-- CONTENIDO -->
+<main class="flex-1 flex items-center justify-center px-4 py-12">
+  <div class="w-full max-w-300">
+
+    
+
+
+    <!-- CARD del formulario -->
+    <div class="bg-white rounded-2xl border border-gray-100 p-8">
+      <!-- Botón Google — Google lo renderiza automáticamente aquí -->
+    <div id="googleBtn" class="w-full flex justify-center"></div>
+    <!-- Separador -->
+    <div class="flex items-center gap-3 my-4">
+      <div class="flex-1 h-px bg-gray-100"></div>
+      <span class="text-xs text-gray-300 font-semibold">o</span>
+      <div class="flex-1 h-px bg-gray-100"></div>
+    </div>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-5 border-2 border-gray-300 p-8 rounded-lg">
+        <!-- Mensaje de error general -->
+        <div *ngIf="error" class="error-message" class="text-red-600 text-xs">
+          {{ error }}
+        </div>
+        <!-- Tipo de usuario -->
+        <div class="flex flex-col gap-2">
+          <label class="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            Soy...
+          </label>
+          <div class="grid grid-cols-2 gap-3">
+            <label
+              class="flex flex-col items-center gap-2 p-4 rounded-xl border-2 border-gray-300 bg-gray-50 cursor-pointer transition-all has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-100">
+              <input type="radio" formControlName="tipo" value="familiar" class="hidden" />
+              <span class="text-sm font-bold text-gray-600">Familiar</span>
+              <span class="text-xs text-gray-400 text-center leading-tight">Padre, madre o tutor</span>
+            </label>
+
+            <label
+              class="flex flex-col items-center gap-2 p-6 rounded-xl border-2 border-gray-200 bg-gray-50 cursor-pointer transition-all has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-100">
+              <input type="radio" formControlName="tipo" value="comun" class="hidden" />
+              <span class="text-sm font-bold text-gray-600">Usuario común</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Nombre completo -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            Nombre completo <span class="text-indigo-400">*</span>
+          </label>
+          <input type="text" formControlName="nombre" placeholder="Ej: Ana García López"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-[#FFF9F4] text-sm text-gray-700 placeholder-gray-300 outline-none focus:border-indigo-400 focus:bg-white transition-colors"
+            [class.border-red-300]="
+              registerForm.get('nombre')?.invalid &&
+              registerForm.get('nombre')?.touched
+            " />
+        </div>
+        <!-- Mensaje de error para nombre -->
+        <div *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched" class="error-text">
+          <div *ngIf="registerForm.get('nombre')?.errors?.['required']" class="text-red-600 text-xs">
+            El nombre es obligatorio
+          </div>
+          <div *ngIf="registerForm.get('nombre')?.errors?.['minlength']" class="text-red-600 text-xs">
+            El nombre debe tener mínimo 2 letras
+          </div>
+          <div *ngIf="registerForm.get('nombre')?.hasError('pattern')" class="text-red-600 text-xs">
+            Solo se permiten letras y espacios.
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            Correo electrónico <span class="text-indigo-400">*</span>
+          </label>
+          <input type="email" formControlName="email" placeholder="correo@ejemplo.com"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-[#FFF9F4] text-sm text-gray-700 placeholder-gray-300 outline-none focus:border-indigo-400 focus:bg-white transition-colors"
+            [class.border-red-300]="
+              registerForm.get('email')?.invalid &&
+              registerForm.get('email')?.touched
+            " />
+        </div>
+        <!-- Mensajes de error específicos para email -->
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-text">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']" class="text-red-600 text-xs">
+            El correo electrónico es obligatorio
+          </div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']" class="text-red-600 text-xs">
+            Ingresa un correo electrónico válido
+          </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            Contraseña <span class="text-indigo-400">*</span>
+          </label>
+          <input type="password" formControlName="password" placeholder="Mínimo 6 caracteres"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-[#FFF9F4] text-sm text-gray-700 placeholder-gray-300 outline-none focus:border-indigo-400 focus:bg-white transition-colors"
+            [class.border-red-300]="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            " />
+        </div>
+        <!-- Mensaje de error para contraseña -->
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-text">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']" class="text-red-600 text-xs">
+            La contraseña es obligatoria
+          </div>
+        </div>
+
+        <div *ngIf="registerForm.get('password')?.errors?.['minlength']" class="text-red-600 text-xs">
+          La contraseña debe tener minimo 6 caracteres
+        </div>
+
+        <div *ngIf="registerForm.get('password')?.errors?.['maxlength']" class="text-red-600 text-xs">
+          La contraseña puede tener maximo 16 caracteres
+        </div>
+
+        <div *ngIf="registerForm.get('password')?.hasError('pattern')" class="text-red-600 text-xs">
+          No puedes poner caracteres especiales
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            Confirmar contraseña <span class="text-indigo-400">*</span>
+          </label>
+          <input type="password" formControlName="confirmarPassword" placeholder="Repite tu contraseña"
+            class="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-[#FFF9F4] text-sm text-gray-700 placeholder-gray-300 outline-none focus:border-indigo-400 focus:bg-white transition-colors"
+            [class.border-red-300]="
+              registerForm.errors?.['passwordMismatch'] &&
+              registerForm.get('confirmarPassword')?.touched
+            " />
+          <p *ngIf="
+              registerForm.errors?.['passwordMismatch'] &&
+              registerForm.get('confirmarPassword')?.touched
+            " class="text-xs text-red-500 mt-1">
+            Las contraseñas no coinciden
+          </p>
+        </div>
+        <!-- Mensaje de error para contraseña -->
+        <div *ngIf="registerForm.get('confirmarPassword')?.invalid && registerForm.get('confirmarPassword')?.touched"
+          class="error-text">
+          <div *ngIf="registerForm.get('confirmarPassword')?.errors?.['required']" class="text-red-600 text-xs">
+            Repetir la contraseña es obligatorio
+          </div>
+        </div>
+        <!-- Foto de perfil -->
+        <div class="flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-gray-400 uppercase tracking-wide">
+            Foto de perfil <span class="text-gray-300">(opcional)</span>
+          </label>
+          <div class="flex items-center gap-4">
+            <!-- Preview -->
+            <div
+              class="w-14 h-14 rounded-full border-2 border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center flex-shrink-0">
+              @if (fotoPreview) {
+              <img [src]="fotoPreview" class="w-full h-full object-cover" alt="Preview" />
+              } @else {
+              <span class="text-2xl"><i class="fa-solid fa-user text-indigo-500"></i></span>
+              }
+            </div>
+            <!-- Input -->
+            <label class="cursor-pointer flex-1">
+              <div
+                class="w-full px-4 py-2.5 rounded-xl border border-dashed border-gray-300 bg-[#FFF9F4] text-sm text-gray-400 text-center hover:border-indigo-400 hover:text-indigo-400 transition-colors">
+                {{
+                fotoSeleccionada
+                ? fotoSeleccionada.name
+                : "Seleccionar imagen..."
+                }}
+              </div>
+              <input type="file" accept="image/*" class="hidden" (change)="onFotoSeleccionada($event)" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Botón submit -->
+        <button type="submit" [disabled]="loading"
+          class="w-full bg-indigo-400 hover:bg-indigo-500 text-white font-bold py-3 rounded-full transition-colors text-sm mt-1 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ loading ? "Creando cuenta..." : "Crear cuenta gratis" }}
+        </button>
+
+        <!-- Separador -->
+        <div class="flex items-center gap-3">
+          <div class="flex-1 h-px bg-gray-100"></div>
+          <span class="text-xs text-gray-300 font-semibold">o</span>
+          <div class="flex-1 h-px bg-gray-100"></div>
+        </div>
+
+        <!-- Ya tienes cuenta -->
+        <p class="text-center text-xs text-gray-400">
+          ¿Ya tienes cuenta?
+          <a routerLink="/inicioSesion" class="text-indigo-400 font-bold hover:underline">Inicia sesión</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</main>

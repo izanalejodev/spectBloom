@@ -1,0 +1,32 @@
+<div class="page-container">
+
+    <div class="contenedor-usuario">
+        <div class="saludo-usuario">
+            <h1 class="texto-saludo">¡Hola, {{ nombreNino }}!</h1>
+        </div>
+    </div>
+
+    <div class="section1">
+        <div class="selector-fecha">
+            <button (click)="anterior()" class="nav-button">‹</button>
+            <h2 class="texto-mes">
+                {{ mesActual }}
+            </h2>
+            <button (click)="siguiente()" class="nav-button">›</button>
+        </div>
+
+        <button (click)="irAVistaPadre()" class="boton-vista"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.036 12.322a1.012 1.012 0 010-.644C3.67 8.242 7.452 6 12 6c4.548 0 8.33 2.242 9.964 5.678c.153.322.153.644 0 .966C20.33 15.758 16.548 18 12 18c-4.548 0-8.33-2.242-9.964-5.678z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg></button>
+    </div>
+
+    <div class="px-8 pb-6">
+        <div>
+            <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+        </div>
+    </div>
+
+</div>

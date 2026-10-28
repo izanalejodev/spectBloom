@@ -1,0 +1,99 @@
+<main class="min-h-screen bg-[#FFF9F4] px-6 py-8">
+  <h1 class="text-3xl font-bold text-[#3D2B1F] mb-6">Panel de Administración</h1>
+
+  @if (errorMsg) {
+    <div class="mb-4 px-4 py-3 bg-red-100 text-red-700 rounded-xl">{{ errorMsg }}</div>
+  }
+
+  <button (click)="openCreate()"
+    class="mb-6 px-5 py-2 bg-indigo-500 text-white font-semibold rounded-xl hover:bg-indigo-600 transition cursor-pointer">
+    + Nuevo Usuario
+  </button>
+
+  <!-- Tabla de usuarios -->
+  <div class="overflow-x-auto rounded-2xl shadow-md">
+    <table class="w-full bg-white text-sm text-[#3D2B1F]">
+      <thead class="bg-[#EAE0D8]">
+        <tr>
+          <th class="p-4 text-left font-semibold">Nombre</th>
+          <th class="p-4 text-left font-semibold">Email</th>
+          <th class="p-4 text-left font-semibold">Rol</th>
+          <th class="p-4 text-left font-semibold">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track user.id) {
+          <tr class="border-t border-[#EAE0D8] hover:bg-[#FFF9F4] transition">
+            <td class="p-4">{{ user.nombre }}</td>
+            <td class="p-4">{{ user.email }}</td>
+            <td class="p-4 capitalize">{{ user.rol }}</td>
+            <td class="p-4 flex gap-2">
+              <button (click)="openEdit(user)"
+                class="px-3 py-1 bg-amber-400 text-white rounded-lg hover:bg-amber-500 transition cursor-pointer">
+                Editar
+              </button>
+              <button (click)="delete(user.id)"
+                class="px-3 py-1 bg-red-400 text-white rounded-lg hover:bg-red-500 transition cursor-pointer">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="4" class="p-6 text-center text-gray-400">No hay usuarios registrados</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal formulario -->
+  @if (showForm) {
+    <div class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4">
+      <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-xl">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-xl font-bold text-[#3D2B1F]">
+            {{ editingUser ? 'Editar Usuario' : 'Nuevo Usuario' }}
+          </h2>
+          <button (click)="showForm = false"
+            class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">
+            ✕
+          </button>
+        </div>
+
+        @if (errorMsg) {
+          <div class="mb-3 px-3 py-2 bg-red-100 text-red-700 rounded-xl text-sm">{{ errorMsg }}</div>
+        }
+
+        <div class="flex flex-col gap-4">
+          <input [(ngModel)]="form.nombre" placeholder="Nombre"
+            class="border border-[#EAE0D8] rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+
+          <input [(ngModel)]="form.email" type="email" placeholder="Email"
+            class="border border-[#EAE0D8] rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+
+          <input [(ngModel)]="form.password" type="password"
+            [placeholder]="editingUser ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña'"
+            class="border border-[#EAE0D8] rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+
+          <select [(ngModel)]="form.rol"
+            class="border border-[#EAE0D8] rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-300">
+            <option value="familiar">Familiar</option>
+            <option value="comun">Comun</option>
+          </select>
+        </div>
+
+        <div class="flex gap-3 mt-6">
+          <button (click)="save()"
+            class="flex-1 py-2 bg-indigo-500 text-white font-semibold rounded-xl hover:bg-indigo-600 transition cursor-pointer">
+            Guardar
+          </button>
+          <button (click)="showForm = false"
+            class="flex-1 py-2 bg-[#EAE0D8] text-[#3D2B1F] font-semibold rounded-xl hover:bg-[#d6ccc4] transition cursor-pointer">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</main>

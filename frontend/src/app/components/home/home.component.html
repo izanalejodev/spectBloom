@@ -1,0 +1,260 @@
+<!-- HERO -->
+<div
+  class="relative overflow-hidden min-h-[85vh] flex items-center px-5 md:px-[10%] pt-10 md:pt-12 pb-20 border-b border-gray-100 md:border-none">
+
+  <!-- Fondo -->
+  <div
+    class="absolute inset-0 opacity-[0.16] md:opacity-[0.22] bg-cover bg-center scale-110"
+    style="background-image: url('/fondoHome.png');">
+  </div>
+
+  <!-- Contenido -->
+  <div class="relative z-10 max-w-2xl">
+
+    <span
+      class="inline-flex items-center gap-1.5 bg-indigo-100 text-indigo-500 text-[11px] md:text-xs font-bold px-3 md:px-4 py-1 rounded-full tracking-wide mb-5 md:mb-6">
+      <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 md:hidden"></span>
+      TEA · TDAH
+    </span>
+
+    @if (!authService.isLoggedIn()) {
+    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+      Spect<span class="text-indigo-300">Bloom</span>
+    </h1>
+    }
+
+    @if (authService.isLoggedIn()) {
+    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+      Hola, <span class="text-indigo-300">{{ userName }}!</span>
+    </h1>
+    }
+
+    <p class="text-base md:text-2xl font-semibold text-gray-700 mt-3 md:mt-4">
+      Aprender juntos, <span class="text-indigo-300">crecer sin límites</span>
+    </p>
+
+    <p class="text-sm md:text-lg text-gray-500 mt-4 leading-relaxed max-w-xl">
+      Recursos, actividades y apoyo especializado para niños con necesidades especiales y sus familias.
+    </p>
+
+  <!-- Botones móvil -->
+  <div class="flex gap-3 mt-6 md:hidden">
+    <a href="#recursos"
+      class="flex-1 flex items-center justify-center gap-2 bg-indigo-300 hover:bg-indigo-500 text-white text-sm font-bold px-4 py-3 rounded-2xl transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+      </svg>
+      Explorar
+    </a>
+    @if (authService.isFamiliar()) {
+    <button type="button" routerLink="/calendario"
+      class="flex-1 flex items-center justify-center gap-2 bg-white border-2 border-indigo-300 hover:border-indigo-300 text-indigo-300 hover:text-indigo-500 text-sm font-bold px-4 py-3 rounded-2xl transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+      </svg>
+      Actividades
+    </button>
+    }
+  </div>
+
+  <!-- Botones desktop -->
+  <div class="hidden md:flex gap-3 mt-6">
+    <a type="button"
+      class="bg-indigo-300 text-white hover:bg-indigo-500 text-sm font-bold px-5 py-2.5 rounded-full transition-colors"
+      href="#recursos">
+      Explorar recursos
+    </a>
+    @if (authService.isFamiliar()) {
+    <button type="button" routerLink="/calendario"
+      class="bg-white text-indigo-300 border-2 border-indigo-300 hover:border-indigo-500 hover:text-indigo-500 text-sm font-bold px-5 py-2.5 rounded-full transition-colors">
+      Ver actividades
+    </button>
+    }
+  </div>
+</div>
+</div>
+
+<hr class="border-gray-100 hidden md:block mx-[10%]">
+
+<!-- CONDICIONES -->
+<div class="px-5 md:px-[10%] pt-7 md:py-10">
+  <h2 class="text-base font-bold text-gray-800 mb-4 md:hidden">
+    ¿Qué es <span class="text-indigo-300">cada condición</span>?
+  </h2>
+
+  <!-- Móvil -->
+  <div class="flex flex-col gap-3 md:hidden">
+    <div class="bg-white rounded-2xl border border-indigo-100 p-4 flex gap-4 items-start">
+      <div class="flex-1 min-w-0">
+        <p class="text-s font-bold text-indigo-500 tracking-wide mb-1 text-center">TEA</p>
+        <p class="text-gray-600 text-sm leading-relaxed ">Los trastornos del espectro autista (TEA) son alteraciones del
+          neurodesarrollo que se caracterizan por una afectación en la capacidad de comunicación e interacción social,
+          la presencia de un patrón de conductas repetitivas (intereses restringidos, estereotipias, etc.), rigidez de
+          pensamiento y una desregulación del perfil sensorial (la manera en que procesan la información que captan con
+          los sentidos).
+          <br>Estas características pueden presentarse en mayor o menor grado y afectar de diversas maneras la vida del
+          niño, el adolescente y el adulto y, pese a que pueden cambiar con el tiempo, persisten a lo largo de toda la
+          vida. También pueden variar significativamente en función del nivel de lenguaje, la capacidad cognitiva, la
+          presencia de otras condiciones psiquiátricas o médicas, y la influencia del entorno familiar, educativo y
+          social de la persona.
+        </p>
+        <p class="text-[10px] text-gray-300 mt-2 italic">Fuente: Gencat</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl border border-purple-100 p-4 flex gap-4 items-start">
+      <div class="flex-1 min-w-0">
+        <p class="text-s font-bold text-purple-500 tracking-wide mb-1 text-center">TDAH</p>
+        <p class="text-gray-600 text-sm leading-relaxed">
+          El trastorno por déficit de atención e hiperactividad (TDAH) es un trastorno del neurodesarrollo (relacionado
+          con la función cerebral) que suele aparecer durante la infancia y que se caracteriza por falta de atención,
+          hiperactividad y comportamiento impulsivo.
+          <br>Se trata de una enfermedad crónica que produce un gran impacto en la vida de los niños afectados, ya que
+          puede comportar dificultades en diversos ámbitos:
+        </p>
+
+        <ul class="text-gray-600 text-sm leading-relaxed">
+          <li>
+            <strong>Cognitivo:</strong> El TDAH influye en el desarrollo de las funciones ejecutivas, que son
+            actividades mentales complejas y responsables de la planificación, la organización y la evaluación del
+            comportamiento necesario para alcanzar objetivos.
+          </li>
+          <li>
+            <strong>Académico:</strong> Los niños que padecen este trastorno pueden presentar bajo rendimiento escolar y
+            dificultades de aprendizaje para la lectura, la escritura y el cálculo.
+          </li>
+          <li>
+            <strong>Social:</strong> Las dificultades de interacción y la falta de habilidades sociales pueden limitar
+            el establecimiento de las relaciones interpersonales. Otras características del TDAH que afectan a este
+            ámbito son la interpretación incorrecta de las situaciones sociales y las dificultades para respetar las
+            normas, los límites, las promesas, los secretos y los favores.
+          </li>
+        </ul>
+        <p class="text-[10px] text-gray-300 mt-2 italic">Fuente: Gencat</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop (original) -->
+  <div class="hidden md:grid md:grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-2xl border border-indigo-100">
+      <h2 class="text-lg font-bold text-indigo-400 mb-3">¿Qué es el TEA?</h2>
+      <p class="text-gray-600 text-sm leading-relaxed ">Los trastornos del espectro autista (TEA) son alteraciones del
+        neurodesarrollo que se caracterizan por una afectación en la capacidad de comunicación e interacción social, la
+        presencia de un patrón de conductas repetitivas (intereses restringidos, estereotipias, etc.), rigidez de
+        pensamiento y una desregulación del perfil sensorial (la manera en que procesan la información que captan con
+        los sentidos).
+        <br>Estas características pueden presentarse en mayor o menor grado y afectar de diversas maneras la vida del
+        niño, el adolescente y el adulto y, pese a que pueden cambiar con el tiempo, persisten a lo largo de toda la
+        vida. También pueden variar significativamente en función del nivel de lenguaje, la capacidad cognitiva, la
+        presencia de otras condiciones psiquiátricas o médicas, y la influencia del entorno familiar, educativo y social
+        de la persona.
+      </p>
+      <p class="text-xs text-gray-400 mt-4 italic">Fuente: Gencat</p>
+    </div>
+    <div class="bg-white p-6 rounded-2xl border border-purple-100">
+      <h2 class="text-lg font-bold text-purple-400 mb-3">¿Qué es el TDAH?</h2>
+      <p class="text-gray-600 text-sm leading-relaxed">
+        El trastorno por déficit de atención e hiperactividad (TDAH) es un trastorno del neurodesarrollo (relacionado
+        con la función cerebral) que suele aparecer durante la infancia y que se caracteriza por falta de atención,
+        hiperactividad y comportamiento impulsivo.
+        <br>Se trata de una enfermedad crónica que produce un gran impacto en la vida de los niños afectados, ya que
+        puede comportar dificultades en diversos ámbitos:
+      </p>
+
+      <ul class="text-gray-600 text-sm leading-relaxed">
+        <li>
+          <strong>Cognitivo:</strong> El TDAH influye en el desarrollo de las funciones ejecutivas, que son actividades
+          mentales complejas y responsables de la planificación, la organización y la evaluación del comportamiento
+          necesario para alcanzar objetivos.
+        </li>
+        <li>
+          <strong>Académico:</strong> Los niños que padecen este trastorno pueden presentar bajo rendimiento escolar y
+          dificultades de aprendizaje para la lectura, la escritura y el cálculo.
+        </li>
+        <li>
+          <strong>Social:</strong> Las dificultades de interacción y la falta de habilidades sociales pueden limitar el
+          establecimiento de las relaciones interpersonales. Otras características del TDAH que afectan a este ámbito
+          son la interpretación incorrecta de las situaciones sociales y las dificultades para respetar las normas, los
+          límites, las promesas, los secretos y los favores.
+        </li>
+      </ul>
+      <p class="text-xs text-gray-400 mt-4 italic">Fuente: Gencat</p>
+    </div>
+  </div>
+</div>
+
+<hr class="border-gray-100 mx-5 md:mx-[10%]">
+
+<!-- NOTICIAS -->
+<div class="px-5 md:px-[10%] py-7 md:py-10" id="recursos">
+  <h2 class="text-base md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">
+    Noticias sobre <span class="text-indigo-300">Neurodivergencia</span>
+  </h2>
+
+  @if (cargando) {
+  <div class="flex items-center gap-2 py-8 text-indigo-400">
+    <span class="text-sm font-medium">Buscando noticias...</span>
+  </div>
+  }
+
+  @if (error) {
+  <p class="text-sm text-red-400 py-6">No se pudieron cargar las noticias. Inténtalo más tarde.</p>
+  }
+
+  <div class="flex flex-col gap-3 md:grid md:grid-cols-2 md:gap-6">
+    @for (articulo of articulos; track articulo.link) {
+
+    <!-- Móvil -->
+    <article class="md:hidden bg-white border border-gray-100 rounded-2xl overflow-hidden">
+      <div class="p-4 pb-3">
+        <div class="flex items-center justify-between mb-2">
+          <span
+            class="text-[10px] font-bold tracking-wide text-indigo-400 bg-indigo-50 px-2.5 py-1 rounded-full">Neurodivergencia</span>
+          <span class="text-[11px] text-gray-300">{{ articulo.anio }}</span>
+        </div>
+        <h3 class="text-sm font-bold text-gray-800 leading-snug line-clamp-2 mb-2">{{ articulo.titulo }}</h3>
+        <p class="text-xs text-gray-400 leading-relaxed line-clamp-3">{{ articulo.resumen }}</p>
+      </div>
+      <div class="px-4 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+        <span class="text-[10px] text-gray-300">API OpenAlex</span>
+        <a [href]="articulo.link" target="_blank"
+          class="text-xs font-bold text-indigo-400 hover:text-indigo-600 flex items-center gap-1 transition-colors">
+          Leer artículo
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Desktop (original) -->
+    <article
+      class="hidden md:flex bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex-col">
+      <div class="p-5 pb-3">
+        <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
+          <span class="uppercase tracking-wide font-semibold text-indigo-300">Noticias sobre Neurodivergencia</span>
+          <span>{{ articulo.anio }}</span>
+        </div>
+        <h3 class="text-lg font-bold text-gray-800 leading-snug line-clamp-2">{{ articulo.titulo }}</h3>
+      </div>
+      <div class="px-5 pb-4">
+        <p class="text-sm text-gray-500 leading-relaxed line-clamp-4">{{ articulo.resumen }}</p>
+      </div>
+      <div class="mt-auto px-5 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+        <span class="text-xs text-gray-400">Fuente: API OpenAlex</span>
+        <a [href]="articulo.link" target="_blank"
+          class="text-xs font-bold text-indigo-400 hover:text-indigo-600 transition-colors">
+          Leer noticia →
+        </a>
+      </div>
+    </article>
+
+    }
+  </div>
+
+  @if (!cargando && !error && articulos.length === 0) {
+  <p class="text-center text-gray-400 py-10 text-sm">No se encontraron noticias disponibles.</p>
+  }
+</div>

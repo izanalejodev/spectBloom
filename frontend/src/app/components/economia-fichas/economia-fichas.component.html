@@ -1,0 +1,727 @@
+<!-- MODAL SELECCIÓN TIPO: TEA o TDAH -->
+@if (modalSeleccionTipo) {
+<div class="fixed inset-0 bg-black/50 z-[300] flex items-center justify-center px-4">
+  <div class="bg-white rounded-3xl p-8 w-full max-w-md shadow-xl">
+    <div class="flex items-center justify-between mb-2">
+      <h2 class="text-2xl font-extrabold text-[#3D2B1F]">¿Para quién es el objetivo?</h2>
+      <button (click)="modalSeleccionTipo = false"
+        class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <p class="text-sm text-[#7A6458] mb-7">Elige el perfil del niño para recibir recomendaciones personalizadas antes de
+      crear el objetivo.</p>
+    <div class="flex flex-col gap-4">
+
+      <!-- TEA -->
+      <button (click)="seleccionarPerfilYMostrarRecomendaciones('TEA')"
+        class="flex items-start gap-4 border-2 border-[#EAE0D8] rounded-2xl p-5 text-left hover:border-[#1CA64B] hover:bg-[#E1F7E9] transition cursor-pointer group">
+        <span class="text-4xl mt-0.5"><i class="fa-solid fa-puzzle-piece text-3xl text-[#1CA64B]"></i></span>
+        <div>
+          <p class="text-base font-extrabold text-[#3D2B1F] group-hover:text-[#1CA64B] transition">TEA</p>
+          <p class="text-xs text-[#7A6458] mt-0.5">Trastorno del Espectro Autista. Objetivos con apoyo visual, rutinas
+            claras y previsibilidad.</p>
+        </div>
+      </button>
+
+      <!-- TDAH -->
+      <button (click)="seleccionarPerfilYMostrarRecomendaciones('TDAH')"
+        class="flex items-start gap-4 border-2 border-[#EAE0D8] rounded-2xl p-5 text-left hover:border-[#f5a623] hover:bg-[#FFF8EE] transition cursor-pointer group">
+        <span class="text-4xl mt-0.5"><i class="fa-solid fa-brain text-3xl text-[#f5a623]"></i></span>
+        <div>
+          <p class="text-base font-extrabold text-[#3D2B1F] group-hover:text-[#f5a623] transition">TDAH</p>
+          <p class="text-xs text-[#7A6458] mt-0.5">Trastorno por Déficit de Atención e Hiperactividad. Objetivos cortos,
+            motivadores y con refuerzo inmediato.</p>
+        </div>
+      </button>
+
+    </div>
+  </div>
+</div>
+}
+
+
+<!-- RECOMENDACIONES TEA -->
+@if (modalRecomendacionesTEA) {
+<div class="fixed inset-0 bg-black/50 z-[300] flex items-center justify-center px-4">
+  <div class="bg-white rounded-3xl p-8 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center gap-3 mb-1">
+      <span class="text-3xl"><i class="fa-solid fa-puzzle-piece text-3xl text-[#1CA64B]"></i></span>
+      <h2 class="text-2xl font-extrabold text-[#3D2B1F]">Recomendaciones TEA</h2>
+    </div>
+    <p class="text-xs text-[#7A6458] uppercase tracking-wider font-bold mb-5">LEER ATENTAMENTE PARA REALIZAR
+      CORRECTAMENTE LA ECONOMIA DE FICHAS</p>
+    <ul class="flex flex-col gap-4 mb-7">
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-image text-xl mt-0.5 text-[#1CA64B]"></i> </span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Usa siempre un pictograma visual.</strong> El infante debe poder ver e
+          identificar el objetivo sin necesidad de leer texto.</p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-list-check text-xl mt-0.5 text-[#1CA64B]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Debe haber un único objetivo concreto y observable.</strong> Evita
+          objetivos ambiguos como "portarse bien". Usa "lavarse los dientes antes de cenar".</p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-rotate text-xl mt-0.5 text-[#1CA64B]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>La rutina es clave.</strong> Lo ideal son 1-2 semanas pero, si se
+          necesita más tiempo una vez completadas las 4 semanas, vuelve a crear el objetivo</p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-clock text-xl mt-0.5 text-[#1CA64B]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Anticipa siempre.</strong> Recuerda al niño el objetivo antes del
+          momento en que debe cumplirlo, no durante ni después.</p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-gift text-xl mt-0.5 text-[#1CA64B]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Pacta el premio con antelación</strong> y muéstralo visualmente si es
+          posible. La previsibilidad del refuerzo es muy motivadora.</p>
+      </li>
+    </ul>
+    <div class="flex gap-3">
+      <button (click)="modalRecomendacionesTEA = false; modalSeleccionTipo = true"
+        class="flex-1 border-2 border-[#EAE0D8] text-[#7A6458] rounded-2xl py-3 text-sm font-bold cursor-pointer hover:bg-[#FFF9F4] transition">
+        ← Volver
+      </button>
+      <button (click)="modalRecomendacionesTEA = false; modalAddObjetivo = true"
+        class="flex-1 bg-[#1CA64B] text-white rounded-2xl py-3 text-base font-extrabold cursor-pointer hover:opacity-90 transition">
+        Entendido, crear objetivo ✓
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+
+<!-- RECOMENDACIONES TDAH -->
+@if (modalRecomendacionesTDAH) {
+<div class="fixed inset-0 bg-black/50 z-[300] flex items-center justify-center px-4">
+  <div class="bg-white rounded-3xl p-8 w-full max-w-lg shadow-xl max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center gap-3 mb-1">
+      <span class="text-3xl"><i class="fa-solid fa-brain text-3xl text-[#f5a623]"></i></span>
+      <h2 class="text-2xl font-extrabold text-[#3D2B1F]">Recomendaciones TDAH</h2>
+    </div>
+    <p class="text-xs text-[#7A6458] uppercase tracking-wider font-bold mb-5">LEER ATENTAMENTE PARA REALIZAR
+      CORRECTAMENTE LA ECONOMIA DE FICHAS</p>
+    <ul class="flex flex-col gap-4 mb-7">
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-bullseye text-xl mt-0.5 text-[#f5a623]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Un único objetivo a la vez.</strong></p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-bolt text-xl mt-0.5 text-[#f5a623]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Propon objetivos alcanzables.</strong>
+          Cuanto más inmediato sea el logro, mayor es la motivación.</p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-calendar-days text-xl mt-0.5 text-[#f5a623]"></i></span>
+        <p class="text-sm text-[#3D2B1F]"><strong>Revisa el calendario juntos cada día.</strong> El repaso diario
+          refuerza la memoria de trabajo y mantiene el foco en el objetivo.</p>
+      </li>
+      <li class="flex gap-3 items-start">
+        <span class="text-xl mt-0.5"><i class="fa-solid fa-trophy text-xl mt-0.5 text-[#f5a623]"></i> </span>
+        <p class="text-sm text-[#3D2B1F]"><strong>El premio debe ser motivador y relativamente rápido.</strong> Una
+          semana puede ser mucho tiempo; asegúrate de que el premio sea algo que el niño desee de verdad.</p>
+      </li>
+    </ul>
+    <div class="flex gap-3">
+      <button (click)="modalRecomendacionesTDAH = false; modalSeleccionTipo = true"
+        class="flex-1 border-2 border-[#EAE0D8] text-[#7A6458] rounded-2xl py-3 text-sm font-bold cursor-pointer hover:bg-[#FFF9F4] transition">
+        ← Volver
+      </button>
+      <button (click)="modalRecomendacionesTDAH = false; modalAddObjetivo = true"
+        class="flex-1 bg-[#f5a623] text-white rounded-2xl py-3 text-base font-extrabold cursor-pointer hover:opacity-90 transition">
+        Entendido, crear objetivo ✓
+      </button>
+    </div>
+  </div>
+</div>
+}
+
+
+<!-- CABECERA -->
+<div class="px-6 pt-6 pb-4 flex flex-wrap items-center justify-between gap-4 border-b border-[#EAE0D8]">
+  <div>
+
+    <h1 class="text-2xl font-extrabold text-[#3D2B1F]">Economía de Fichas de <span class="text-indigo-300">{{ kidActivo?.Nombre || 'tu hijo/a' }}</span></h1>
+    <p class="text-sm text-[#7A6458]">Un objetivo, una semana, un premio</p>
+  </div>
+  <div class="flex items-center gap-3 flex-wrap">
+    @if (kids.length > 0) {
+    <div class="flex items-center gap-2 flex-wrap">
+      @for (kid of kids; track kid.KidID) {
+      <div (click)="seleccionarKid(kid)" [class.bg-[#3a56d4cc]]="kidActivo?.KidID === kid.KidID"
+        [class.bg-white]="kidActivo?.KidID !== kid.KidID"
+        [class.scale-120]="kidActivo?.KidID === kid.KidID"
+        class="flex items-center justify-center gap-2 rounded-full px-4 py-1.5 border border-[#EAE0D8] cursor-pointer transition">
+        <span [class.text-white]="kidActivo?.KidID === kid.KidID" class="text-sm font-bold text-gray-800">{{ kid.Nombre }}</span>
+      </div>
+      }
+    </div>
+    }
+
+  </div>
+</div>
+
+<!-- CUERPO PRINCIPAL -->
+<div class="px-6 pt-6 pb-10">
+
+  @if (kids.length == 0) {
+  <p class="text-gray-600 text-m text-center mt-5">No tienes ningún infante registrado aún.</p>
+  <p class="text-gray-500 text-s mt-1 text-center">Pulsa sobre tu foto de perfil para gestionarlo</p>
+  } @else {
+
+  @if (!objetivo) {
+  <div class="flex flex-col items-center justify-center py-16 gap-6">
+    <p class="text-[#7A6458] text-base">No hay ningún objetivo activo para este niño.</p>
+    <button (click)="modalSeleccionTipo = true"
+      class="flex items-center gap-2 bg-indigo-300 text-white rounded-2xl px-8 py-4 text-lg font-extrabold cursor-pointer hover:opacity-90 transition shadow-md">
+      ＋ Crear Objetivo
+    </button>
+  </div>
+
+  } @else {
+  <div>
+
+    <!-- OBJETIVO Y PREMIO EN GRANDE -->
+    <div class="flex flex-wrap gap-6 mb-8 items-start">
+
+      <!-- Objetivo -->
+      <div
+        class="flex-1 min-w-[200px] flex flex-col items-center gap-3 bg-white border-2 border-[#EAE0D8] rounded-3xl p-6">
+        <p class="text-2xl font-extrabold text-[#7A6458] uppercase tracking-widest">Objetivo</p>
+        @if (objetivo.pictograma?.URL) {
+        <img [src]="objetivo.pictograma.URL" [alt]="objetivo.Titulo" class="w-28 h-28 object-contain" />
+        }
+        <p class="text-2xl font-extrabold text-[#3D2B1F] uppercase tracking-wide text-center">
+          {{ objetivo.Titulo }}
+        </p>
+      </div>
+
+      <!-- Premio TEA -->
+      @if (objetivo.Perfil === 'TEA' && objetivo.Recompensa) {
+      <div
+        class="flex-1 min-w-[200px] flex flex-col items-center gap-3 bg-white border-2 border-[#EAE0D8] rounded-3xl p-6">
+        <p class="text-2xl font-extrabold text-[#7A6458] uppercase tracking-widest">Premio</p>
+        @if (objetivo.pictograma_recompensa?.URL) {
+        <img [src]="objetivo.pictograma_recompensa.URL" [alt]="objetivo.Recompensa" class="w-28 h-28 object-contain" />
+        } @else {
+        <span class="text-6xl">🎁</span>
+        }
+        <p class="text-2xl font-extrabold text-[#3D2B1F] uppercase tracking-wide text-center">
+          {{ objetivo.Recompensa }}
+        </p>
+      </div>
+      }
+
+    </div>
+
+    <!-- Recompensas TDAH — ancho completo -->
+    @if (objetivo.Perfil === 'TDAH') {
+    <div class="mb-8 bg-white border-2 border-[#EAE0D8] rounded-3xl p-6">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <span class="text-5xl font-extrabold text-[#f5a623]">{{ totalEstrellas }}</span>
+        <span class="text-3xl"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" class="w-8 h-8 mx-auto">
+            <path fill="#FFB91D"
+              d="M1495.005,1216.796c64.603,93.91,117.661,441.516,52.956,488.509c-55.53,40.342-376.505-112.437-447.759-201.581c-69.368,90.469-383.539,248.345-448.243,201.326c-55.53-40.342-9.404-392.841,53.364-488.152c-107.467-37.997-354.716-287.998-329.996-364.069c21.203-65.265,370.695-130.327,480.736-100.102c2.956-113.966,164.323-426.352,244.293-426.352c68.629,0,238.508,312.285,243.783,426.276c109.277-32.416,456.246,24.541,480.94,100.586C1846.306,918.527,1601.784,1176.581,1495.005,1216.796z" />
+            <path fill="#E59638"
+              d="M687.044,1732c-19.608,0-34.792-4.024-45.886-12.086c-18.309-13.301-28.304-43.048-31.453-93.612c-2.493-40.042-0.305-90.829,6.328-146.874c9.612-81.222,31.473-191.11,63.123-253.744c-60.802-29.772-142.654-101.051-201.789-163.958c-38.819-41.297-70.517-81.281-91.665-115.629c-26.428-42.923-35.537-75.288-27.849-98.947c6.992-21.521,32.193-40.216,79.308-58.834c37.309-14.744,86.285-28.356,141.635-39.368c80.217-15.958,191.487-29.128,260.829-18.39c9.539-67.031,52.044-166.912,93.6-242.589c27.28-49.68,55.512-92.18,81.643-122.907c32.653-38.397,60.616-57.062,85.488-57.062c22.631,0,48.199,18.19,80.467,57.247c25.552,30.927,53.635,73.3,81.213,122.54c39.968,71.36,86.882,173.105,98.104,242.378c66.685-11.646,174.805-2.084,259.622,14.055c55.676,10.595,104.819,24.312,142.115,39.67c46.607,19.191,72.996,40.019,80.678,63.672c6.998,21.522-2.398,51.465-29.571,94.225c-21.516,33.859-53.137,73.662-91.446,115.106c-55.514,60.056-137.785,136.106-200.201,168.176c31.686,59.825,56.005,165.608,66.865,251.265c7.13,56.228,9.27,107.208,6.188,147.427c-3.851,50.259-15.505,81.796-35.63,96.412c-18.308,13.301-49.687,13.614-98.748,0.985c-38.851-10.002-86.475-27.775-137.726-51.4c-74.273-34.238-172.025-88.982-221.815-138.435c-47.113,48.626-140.206,104.446-218.308,141.243c-51.272,24.157-99.095,41.945-138.297,51.443C721.886,1729.333,703,1731.999,687.044,1732z" />
+          </svg></span>
+      </div>
+      <div class="flex flex-wrap gap-3">
+
+        @if (objetivo.RecompensaPequena) {
+        <div class="flex-1 min-w-[140px] flex items-center gap-3 px-4 py-3 rounded-2xl border-2 transition"
+          [class.border-[#f5a623]]="totalEstrellas >= 5" [class.bg-[#FFF8EE]]="totalEstrellas >= 5"
+          [class.border-[#EAE0D8]]="totalEstrellas < 5" [class.opacity-50]="totalEstrellas < 5">
+          <div class="flex-1  text-center">
+            <p class="text-xl font-bold text-[#7A6458] uppercase ">Pequeña · 5 <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2200 2200" class="w-8 h-8 mx-auto">
+                <path fill="#FFB91D"
+                  d="M1495.005,1216.796c64.603,93.91,117.661,441.516,52.956,488.509c-55.53,40.342-376.505-112.437-447.759-201.581c-69.368,90.469-383.539,248.345-448.243,201.326c-55.53-40.342-9.404-392.841,53.364-488.152c-107.467-37.997-354.716-287.998-329.996-364.069c21.203-65.265,370.695-130.327,480.736-100.102c2.956-113.966,164.323-426.352,244.293-426.352c68.629,0,238.508,312.285,243.783,426.276c109.277-32.416,456.246,24.541,480.94,100.586C1846.306,918.527,1601.784,1176.581,1495.005,1216.796z" />
+                <path fill="#E59638"
+                  d="M687.044,1732c-19.608,0-34.792-4.024-45.886-12.086c-18.309-13.301-28.304-43.048-31.453-93.612c-2.493-40.042-0.305-90.829,6.328-146.874c9.612-81.222,31.473-191.11,63.123-253.744c-60.802-29.772-142.654-101.051-201.789-163.958c-38.819-41.297-70.517-81.281-91.665-115.629c-26.428-42.923-35.537-75.288-27.849-98.947c6.992-21.521,32.193-40.216,79.308-58.834c37.309-14.744,86.285-28.356,141.635-39.368c80.217-15.958,191.487-29.128,260.829-18.39c9.539-67.031,52.044-166.912,93.6-242.589c27.28-49.68,55.512-92.18,81.643-122.907c32.653-38.397,60.616-57.062,85.488-57.062c22.631,0,48.199,18.19,80.467,57.247c25.552,30.927,53.635,73.3,81.213,122.54c39.968,71.36,86.882,173.105,98.104,242.378c66.685-11.646,174.805-2.084,259.622,14.055c55.676,10.595,104.819,24.312,142.115,39.67c46.607,19.191,72.996,40.019,80.678,63.672c6.998,21.522-2.398,51.465-29.571,94.225c-21.516,33.859-53.137,73.662-91.446,115.106c-55.514,60.056-137.785,136.106-200.201,168.176c31.686,59.825,56.005,165.608,66.865,251.265c7.13,56.228,9.27,107.208,6.188,147.427c-3.851,50.259-15.505,81.796-35.63,96.412c-18.308,13.301-49.687,13.614-98.748,0.985c-38.851-10.002-86.475-27.775-137.726-51.4c-74.273-34.238-172.025-88.982-221.815-138.435c-47.113,48.626-140.206,104.446-218.308,141.243c-51.272,24.157-99.095,41.945-138.297,51.443C721.886,1729.333,703,1731.999,687.044,1732z" />
+              </svg></p>
+            <p class="text-sm font-bold text-[#3D2B1F]">{{ objetivo.RecompensaPequena }}</p>
+          </div>
+          @if (totalEstrellas >= 5) { <span class="text-green-500 font-extrabold text-lg"></span> }
+        </div>
+        }
+
+        @if (objetivo.RecompensaMediana) {
+        <div class="flex-1 min-w-[140px] flex items-center gap-3 px-4 py-3 rounded-2xl border-2 transition"
+          [class.border-[#f5a623]]="totalEstrellas >= 10" [class.bg-[#FFF8EE]]="totalEstrellas >= 10"
+          [class.border-[#EAE0D8]]="totalEstrellas < 10" [class.opacity-50]="totalEstrellas < 10">
+          <div class="flex-1  text-center">
+            <p class="text-xl font-bold text-[#7A6458] uppercase">Mediana · 10 <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2200 2200" class="w-8 h-8 mx-auto">
+                <path fill="#FFB91D"
+                  d="M1495.005,1216.796c64.603,93.91,117.661,441.516,52.956,488.509c-55.53,40.342-376.505-112.437-447.759-201.581c-69.368,90.469-383.539,248.345-448.243,201.326c-55.53-40.342-9.404-392.841,53.364-488.152c-107.467-37.997-354.716-287.998-329.996-364.069c21.203-65.265,370.695-130.327,480.736-100.102c2.956-113.966,164.323-426.352,244.293-426.352c68.629,0,238.508,312.285,243.783,426.276c109.277-32.416,456.246,24.541,480.94,100.586C1846.306,918.527,1601.784,1176.581,1495.005,1216.796z" />
+                <path fill="#E59638"
+                  d="M687.044,1732c-19.608,0-34.792-4.024-45.886-12.086c-18.309-13.301-28.304-43.048-31.453-93.612c-2.493-40.042-0.305-90.829,6.328-146.874c9.612-81.222,31.473-191.11,63.123-253.744c-60.802-29.772-142.654-101.051-201.789-163.958c-38.819-41.297-70.517-81.281-91.665-115.629c-26.428-42.923-35.537-75.288-27.849-98.947c6.992-21.521,32.193-40.216,79.308-58.834c37.309-14.744,86.285-28.356,141.635-39.368c80.217-15.958,191.487-29.128,260.829-18.39c9.539-67.031,52.044-166.912,93.6-242.589c27.28-49.68,55.512-92.18,81.643-122.907c32.653-38.397,60.616-57.062,85.488-57.062c22.631,0,48.199,18.19,80.467,57.247c25.552,30.927,53.635,73.3,81.213,122.54c39.968,71.36,86.882,173.105,98.104,242.378c66.685-11.646,174.805-2.084,259.622,14.055c55.676,10.595,104.819,24.312,142.115,39.67c46.607,19.191,72.996,40.019,80.678,63.672c6.998,21.522-2.398,51.465-29.571,94.225c-21.516,33.859-53.137,73.662-91.446,115.106c-55.514,60.056-137.785,136.106-200.201,168.176c31.686,59.825,56.005,165.608,66.865,251.265c7.13,56.228,9.27,107.208,6.188,147.427c-3.851,50.259-15.505,81.796-35.63,96.412c-18.308,13.301-49.687,13.614-98.748,0.985c-38.851-10.002-86.475-27.775-137.726-51.4c-74.273-34.238-172.025-88.982-221.815-138.435c-47.113,48.626-140.206,104.446-218.308,141.243c-51.272,24.157-99.095,41.945-138.297,51.443C721.886,1729.333,703,1731.999,687.044,1732z" />
+              </svg></p>
+            <p class="text-sm font-bold text-[#3D2B1F]">{{ objetivo.RecompensaMediana }}</p>
+          </div>
+          @if (totalEstrellas >= 10) { <span class="text-green-500 font-extrabold text-lg"></span> }
+        </div>
+        }
+
+        @if (objetivo.RecompensaGrande) {
+        <div class="flex-1 min-w-[140px] flex items-center gap-3 px-4 py-3 rounded-2xl border-2 transition"
+          [class.border-[#f5a623]]="totalEstrellas >= 20" [class.bg-[#FFF8EE]]="totalEstrellas >= 20"
+          [class.border-[#EAE0D8]]="totalEstrellas < 20" [class.opacity-50]="totalEstrellas < 20">
+          <div class="flex-1  text-center">
+            <p class="text-xl font-bold text-[#7A6458] uppercase">Grande · 20 <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2200 2200" class="w-8 h-8 mx-auto">
+                <path fill="#FFB91D"
+                  d="M1495.005,1216.796c64.603,93.91,117.661,441.516,52.956,488.509c-55.53,40.342-376.505-112.437-447.759-201.581c-69.368,90.469-383.539,248.345-448.243,201.326c-55.53-40.342-9.404-392.841,53.364-488.152c-107.467-37.997-354.716-287.998-329.996-364.069c21.203-65.265,370.695-130.327,480.736-100.102c2.956-113.966,164.323-426.352,244.293-426.352c68.629,0,238.508,312.285,243.783,426.276c109.277-32.416,456.246,24.541,480.94,100.586C1846.306,918.527,1601.784,1176.581,1495.005,1216.796z" />
+                <path fill="#E59638"
+                  d="M687.044,1732c-19.608,0-34.792-4.024-45.886-12.086c-18.309-13.301-28.304-43.048-31.453-93.612c-2.493-40.042-0.305-90.829,6.328-146.874c9.612-81.222,31.473-191.11,63.123-253.744c-60.802-29.772-142.654-101.051-201.789-163.958c-38.819-41.297-70.517-81.281-91.665-115.629c-26.428-42.923-35.537-75.288-27.849-98.947c6.992-21.521,32.193-40.216,79.308-58.834c37.309-14.744,86.285-28.356,141.635-39.368c80.217-15.958,191.487-29.128,260.829-18.39c9.539-67.031,52.044-166.912,93.6-242.589c27.28-49.68,55.512-92.18,81.643-122.907c32.653-38.397,60.616-57.062,85.488-57.062c22.631,0,48.199,18.19,80.467,57.247c25.552,30.927,53.635,73.3,81.213,122.54c39.968,71.36,86.882,173.105,98.104,242.378c66.685-11.646,174.805-2.084,259.622,14.055c55.676,10.595,104.819,24.312,142.115,39.67c46.607,19.191,72.996,40.019,80.678,63.672c6.998,21.522-2.398,51.465-29.571,94.225c-21.516,33.859-53.137,73.662-91.446,115.106c-55.514,60.056-137.785,136.106-200.201,168.176c31.686,59.825,56.005,165.608,66.865,251.265c7.13,56.228,9.27,107.208,6.188,147.427c-3.851,50.259-15.505,81.796-35.63,96.412c-18.308,13.301-49.687,13.614-98.748,0.985c-38.851-10.002-86.475-27.775-137.726-51.4c-74.273-34.238-172.025-88.982-221.815-138.435c-47.113,48.626-140.206,104.446-218.308,141.243c-51.272,24.157-99.095,41.945-138.297,51.443C721.886,1729.333,703,1731.999,687.044,1732z" />
+              </svg></p>
+            <p class="text-sm font-bold text-[#3D2B1F]">{{ objetivo.RecompensaGrande }}</p>
+          </div>
+          @if (totalEstrellas >= 20) { <span class="text-green-500 font-extrabold text-lg"></span> }
+        </div>
+        }
+
+      </div>
+    </div>
+    }
+
+    <!-- TABLA DE ESTRELLAS -->
+    <div class="mb-8 bg-white border-2 border-[#EAE0D8] rounded-3xl p-6">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <p class="text-lg font-extrabold text-[#7A6458] uppercase tracking-widest">Seguimiento semanal</p>
+        @if (objetivo.tipoObjetivo?.Nombre) {
+        <span class="text-xs font-bold bg-[#EAE0D8] text-[#7A6458] rounded-full px-3 py-1 uppercase">
+          {{ objetivo.tipoObjetivo.Nombre }}
+        </span>
+        }
+      </div>
+      <table class="w-full border border-[#EAE0D8] border-collapse">
+        <thead>
+          <tr class="bg-[#FFF9F4]">
+            @for (dia of dias; track dia) {
+            <th class="border border-[#EAE0D8] px-3 py-2 text-[11px] font-bold text-[#7A6458] uppercase">{{ dia }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (fila of marcas; track $index; let f = $index) {
+          <tr>
+            @for (marca of fila; track $index; let c = $index) {
+            <td (click)="toggleEstrella(f, c)" class="border border-[#EAE0D8] text-center cursor-pointer  transition"
+              style="width: 20%; height: 60px;">
+              @if (marca) {
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" class="w-10 h-10 mx-auto">
+                <path fill="#FFB91D"
+                  d="M1495.005,1216.796c64.603,93.91,117.661,441.516,52.956,488.509c-55.53,40.342-376.505-112.437-447.759-201.581c-69.368,90.469-383.539,248.345-448.243,201.326c-55.53-40.342-9.404-392.841,53.364-488.152c-107.467-37.997-354.716-287.998-329.996-364.069c21.203-65.265,370.695-130.327,480.736-100.102c2.956-113.966,164.323-426.352,244.293-426.352c68.629,0,238.508,312.285,243.783,426.276c109.277-32.416,456.246,24.541,480.94,100.586C1846.306,918.527,1601.784,1176.581,1495.005,1216.796z" />
+                <path fill="#E59638"
+                  d="M687.044,1732c-19.608,0-34.792-4.024-45.886-12.086c-18.309-13.301-28.304-43.048-31.453-93.612c-2.493-40.042-0.305-90.829,6.328-146.874c9.612-81.222,31.473-191.11,63.123-253.744c-60.802-29.772-142.654-101.051-201.789-163.958c-38.819-41.297-70.517-81.281-91.665-115.629c-26.428-42.923-35.537-75.288-27.849-98.947c6.992-21.521,32.193-40.216,79.308-58.834c37.309-14.744,86.285-28.356,141.635-39.368c80.217-15.958,191.487-29.128,260.829-18.39c9.539-67.031,52.044-166.912,93.6-242.589c27.28-49.68,55.512-92.18,81.643-122.907c32.653-38.397,60.616-57.062,85.488-57.062c22.631,0,48.199,18.19,80.467,57.247c25.552,30.927,53.635,73.3,81.213,122.54c39.968,71.36,86.882,173.105,98.104,242.378c66.685-11.646,174.805-2.084,259.622,14.055c55.676,10.595,104.819,24.312,142.115,39.67c46.607,19.191,72.996,40.019,80.678,63.672c6.998,21.522-2.398,51.465-29.571,94.225c-21.516,33.859-53.137,73.662-91.446,115.106c-55.514,60.056-137.785,136.106-200.201,168.176c31.686,59.825,56.005,165.608,66.865,251.265c7.13,56.228,9.27,107.208,6.188,147.427c-3.851,50.259-15.505,81.796-35.63,96.412c-18.308,13.301-49.687,13.614-98.748,0.985c-38.851-10.002-86.475-27.775-137.726-51.4c-74.273-34.238-172.025-88.982-221.815-138.435c-47.113,48.626-140.206,104.446-218.308,141.243c-51.272,24.157-99.095,41.945-138.297,51.443C721.886,1729.333,703,1731.999,687.044,1732z" />
+              </svg>
+              }
+            </td>
+            }
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BOTÓN ELIMINAR OBJETIVO -->
+    <div class="flex justify-center">
+      <button (click)="eliminarObjetivo()"
+        class="flex items-center gap-2 border-2 border-red-200 text-red-400 rounded-2xl px-6 py-3 text-sm font-bold cursor-pointer hover:bg-red-50 transition">
+        🗑 Eliminar objetivo
+      </button>
+    </div>
+
+  </div>
+  }
+
+  }
+
+</div>
+<!-- MODAL CREAR OBJETIVO -->
+@if (modalAddObjetivo) {
+<div class="fixed inset-0 bg-black/40 z-[200] flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl border border-[#EAE0D8] p-7 w-full max-w-[440px] max-h-[90vh] overflow-y-auto">
+
+    <!-- Cabecera con badge de perfil -->
+    <div class="flex items-center justify-between mb-5">
+      <div class="flex items-center gap-2">
+        <span class="text-xl font-extrabold text-[#3D2B1F]">＋ Nuevo Objetivo</span>
+        @if (perfilSeleccionado === 'TEA') {
+        <span
+          class="inline-flex items-center gap-1 text-[10px] font-extrabold bg-[#E8EDFF] text-[#6181ff] rounded-full px-2.5 py-1 uppercase tracking-wide">
+          TEA
+        </span>
+        }
+        @if (perfilSeleccionado === 'TDAH') {
+        <span
+          class="inline-flex items-center gap-1 text-[10px] font-extrabold bg-[#FFF3DC] text-[#f5a623] rounded-full px-2.5 py-1 uppercase tracking-wide">
+          TDAH
+        </span>
+        }
+      </div>
+      <button (click)="modalAddObjetivo = false"
+        class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+
+    <form [formGroup]="formObjetivo" (ngSubmit)="anyadir()">
+
+      <!-- Nombre del objetivo -->
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          Nombre del objetivo <span class="text-[#6181ff]">*</span>
+        </label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition"
+          type="text" formControlName="Titulo"
+          [placeholder]="perfilSeleccionado === 'TEA' ? 'Ej: Lavarse los dientes' : 'Ej: Recoger la mochila'" />
+        @if (formObjetivo.get('Titulo')?.touched) {
+        @if (formObjetivo.get('Titulo')?.errors?.['required']) {
+        <p class="text-xs text-red-400 mt-1">Es necesario un titulo</p>
+        }
+        @if (formObjetivo.get('Titulo')?.errors?.['minlength']) {
+        <p class="text-xs text-red-400 mt-1">El titulo es demasiado corto</p>
+        }
+        @if (formObjetivo.get('Titulo')?.errors?.['maxlength']) {
+        <p class="text-xs text-red-400 mt-1">El titulo es demasiado largo</p>
+        }
+        @if (formObjetivo.get('Titulo')?.errors?.['pattern']) {
+        <p class="text-xs text-red-400 mt-1">Los caracteres especiales y numericos no estan disponibles</p>
+        }
+        }
+      </div>
+
+      <!-- Descripción -->
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          Descripción
+          <span class="ml-1 font-normal normal-case tracking-normal text-[#7A6458]">(opcional)</span>
+        </label>
+        <textarea
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition resize-none"
+          rows="2" formControlName="Descripcion"
+          [placeholder]="perfilSeleccionado === 'TEA' ? 'Ej: Antes de cenar, sin recordatorio' : 'Ej: Al llegar a casa, antes de la merienda'">
+        </textarea>
+        @if (formObjetivo.get('Descripcion')?.invalid && formObjetivo.get('Descripcion')?.touched) {
+        @if (formObjetivo.get('Descripcion')?.errors?.['minlength']) {
+        <p class="text-xs text-red-400 mt-1">La descripción es demasiado corta</p>
+        }
+        @if (formObjetivo.get('Descripcion')?.errors?.['maxlength']) {
+        <p class="text-xs text-red-400 mt-1">La descripción es demasiado larga</p>
+        }
+        @if (formObjetivo.get('Descripcion')?.errors?.['pattern']) {
+        <p class="text-xs text-red-400 mt-1">Los caracteres especiales y numericos no estan disponibles</p>
+        }
+        }
+      </div>
+
+      <!-- Pictograma -->
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          Pictograma <span class="text-red-400">*</span>
+          @if (perfilSeleccionado === 'TEA') {
+          <span class="ml-1 font-normal normal-case tracking-normal text-[#6181ff]">Recomendado para TEA</span>
+          }
+        </label>
+        <div class="flex gap-2">
+          <input
+            class="flex-1 px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition"
+            type="text" [(ngModel)]="busquedaPictograma" [ngModelOptions]="{standalone: true}"
+            placeholder="Ej: desayunar, lavarse…" (keyup.enter)="buscarPictogramas(busquedaPictograma)" />
+          <button type="button" (click)="buscarPictogramas(busquedaPictograma)"
+            class="bg-[#6181ff] text-white rounded-xl px-4 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">Buscar</button>
+        </div>
+        @if (cargandoPictograma) {
+        <p class="text-xs text-[#7A6458] mt-2">Buscando…</p>
+        }
+        @if (resultadosPictograma.length > 0) {
+        <div
+          class="grid grid-cols-4 gap-2 mt-3 max-h-48 overflow-y-auto border border-[#EAE0D8] rounded-xl p-2 bg-[#FFF9F4]">
+          @for (picto of resultadosPictograma; track picto._id) {
+          <div (click)="seleccionarPictograma(picto)"
+            class="flex flex-col items-center gap-1 cursor-pointer rounded-lg p-1 hover:bg-[#E8EDFF] transition">
+            <img [src]="'https://static.arasaac.org/pictograms/' + picto._id + '/' + picto._id + '_300.png'"
+              [alt]="picto.keywords[0]?.keyword" class="w-14 h-14 object-contain" />
+            <span class="text-[9px] text-center text-[#7A6458] leading-tight line-clamp-2">{{ picto.keywords[0]?.keyword
+              }}</span>
+          </div>
+          }
+        </div>
+        }
+        @if (pictogramaSeleccionado) {
+        <div class="mt-3 flex items-center gap-3 bg-[#E8EDFF] rounded-xl px-3 py-2">
+          <img [src]="pictogramaSeleccionado.URL" class="w-12 h-12 object-contain rounded" />
+          <p class="flex-1 text-xs font-semibold text-[#3D2B1F]">{{ pictogramaSeleccionado.Titulo }}</p>
+          <button type="button" (click)="pictogramaSeleccionado = null; formObjetivo.patchValue({ PictoID: '' })"
+            class="text-red-400 hover:text-red-600 text-lg font-bold cursor-pointer">✕</button>
+        </div>
+        }
+
+        @if (formObjetivo.get('PictoID')?.invalid && (formObjetivo.get('PictoID')?.touched ||
+        formObjetivo.get('PictoID')?.dirty)) {
+        <p class="text-xs text-red-400 mt-1">Es obligatorio seleccionar un pictograma de la lista</p>
+        }
+      </div>
+      @if (perfilSeleccionado === 'TDAH') {
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          🥉 Recompensa pequeña
+        </label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#f5a623] focus:bg-white transition"
+          type="text" formControlName="RecompensaPequena" placeholder="Ej: 5 min de tablet" />
+        @if (formObjetivo.get('RecompensaPequena')?.errors?.['maxlength']) {
+        <p class="text-xs text-red-400 mt-1">La recompensa es demasiado larga</p>
+        }
+        @if (formObjetivo.get('RecompensaPequena')?.errors?.['pattern']) {
+        <p class="text-xs text-red-400 mt-1">No puedes poner caracteres especiales</p>
+        }
+      </div>
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          🥈 Recompensa mediana
+        </label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#f5a623] focus:bg-white transition"
+          type="text" formControlName="RecompensaMediana" placeholder="Ej: Elegir la cena" />
+
+        @if (formObjetivo.get('RecompensaPequena')?.errors?.['maxlength']) {
+        <p class="text-xs text-red-400 mt-1">La recompensa es demasiado larga</p>
+        }
+        @if (formObjetivo.get('RecompensaPequena')?.errors?.['pattern']) {
+        <p class="text-xs text-red-400 mt-1">No puedes poner caracteres especiales</p>
+        }
+      </div>
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          🥇 Recompensa grande
+        </label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#f5a623] focus:bg-white transition"
+          type="text" formControlName="RecompensaGrande" placeholder="Ej: Salida al parque" />
+
+        @if (formObjetivo.get('RecompensaPequena')?.errors?.['maxlength']) {
+        <p class="text-xs text-red-400 mt-1">La recompensa es demasiado larga</p>
+        }
+        @if (formObjetivo.get('RecompensaPequena')?.errors?.['pattern']) {
+        <p class="text-xs text-red-400 mt-1">No puedes poner caracteres especiales</p>
+        }
+      </div>
+      }
+
+      <!-- Premio -->
+      @if (perfilSeleccionado === 'TEA') {
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          Premio
+          <span class="ml-1 font-normal normal-case tracking-normal text-[#7A6458]">(si se completa la semana)</span>
+        </label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition"
+          type="text" formControlName="Recompensa" [placeholder]="'Ej: Elegir la cena del viernes'" />
+        @if (formObjetivo.get('Recompensa')?.invalid && formObjetivo.get('Recompensa')?.touched) {
+        @if (formObjetivo.get('Recompensa')?.errors?.['maxlength']) {
+        <p class="text-xs text-red-400 mt-1">El titulo es demasiado largo</p>
+        }
+        @if (formObjetivo.get('Recompensa')?.errors?.['pattern']) {
+        <p class="text-xs text-red-400 mt-1">Los caracteres especiales y numericos no estan disponibles</p>
+        }
+        @if (formObjetivo.get('Recompensa')?.errors?.['required']) {
+        <p class="text-xs text-red-400 mt-1">El premio es obligatorio</p>
+        }
+        }
+      </div>
+      <!-- Pictograma Recompensa -->
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">
+          Pictograma del premio
+        </label>
+        <div class="flex gap-2">
+          <input
+            class="flex-1 px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition"
+            type="text" [(ngModel)]="busquedaPictogramaRecompensa" [ngModelOptions]="{standalone: true}"
+            placeholder="Ej: regalo, película…"
+            (keyup.enter)="buscarPictogramasRecompensa(busquedaPictogramaRecompensa)" />
+          <button type="button" (click)="buscarPictogramasRecompensa(busquedaPictogramaRecompensa)"
+            class="bg-[#6181ff] text-white rounded-xl px-4 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">Buscar</button>
+        </div>
+        @if (cargandoPictogramaRecompensa) {
+        <p class="text-xs text-[#7A6458] mt-2">Buscando…</p>
+        }
+        @if (resultadosPictogramaRecompensa.length > 0) {
+        <div
+          class="grid grid-cols-4 gap-2 mt-3 max-h-48 overflow-y-auto border border-[#EAE0D8] rounded-xl p-2 bg-[#FFF9F4]">
+          @for (picto of resultadosPictogramaRecompensa; track picto._id) {
+          <div (click)="seleccionarPictogramaRecompensa(picto)"
+            class="flex flex-col items-center gap-1 cursor-pointer rounded-lg p-1 hover:bg-[#E8EDFF] transition">
+            <img [src]="'https://static.arasaac.org/pictograms/' + picto._id + '/' + picto._id + '_300.png'"
+              [alt]="picto.keywords[0]?.keyword" class="w-14 h-14 object-contain" />
+            <span class="text-[9px] text-center text-[#7A6458] leading-tight line-clamp-2">{{ picto.keywords[0]?.keyword
+              }}</span>
+          </div>
+          }
+        </div>
+        }
+        @if (pictogramaRecompensaSeleccionado) {
+        <div class="mt-3 flex items-center gap-3 bg-[#E8EDFF] rounded-xl px-3 py-2">
+          <img [src]="pictogramaRecompensaSeleccionado.URL" class="w-12 h-12 object-contain rounded" />
+          <p class="flex-1 text-xs font-semibold text-[#3D2B1F]">{{ pictogramaRecompensaSeleccionado.Titulo }}</p>
+          <button type="button"
+            (click)="pictogramaRecompensaSeleccionado = null; formObjetivo.patchValue({ PictoIDRecompensa: '' })"
+            class="text-red-400 hover:text-red-600 text-lg font-bold cursor-pointer">✕</button>
+        </div>
+        }
+        @if (formObjetivo.get('PictoID')?.invalid && formObjetivo.get('PictoID')?.touched) {
+        <p class="text-xs text-red-400 mt-1">Selecciona un pictograma</p>
+        }
+      </div>
+      }
+
+      <!-- Tipo de Objetivo — solo para TDAH -->
+      @if (perfilSeleccionado === 'TDAH') {
+      <div class="mb-5">
+        <div class="flex justify-between items-center mb-1.5">
+          <label class="text-[11px] font-bold text-[#7A6458] uppercase">Tipo de Objetivo</label>
+          <button type="button" (click)="modalTipo = true; modalAddObjetivo = false"
+            class="text-[10px] text-[#6181ff] font-bold underline cursor-pointer">Gestionar tipos</button>
+        </div>
+        <select
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] transition"
+          formControlName="TipoObjetivoID">
+          <option value="">Seleccionar...</option>
+          @for (tipo of tiposObjetivo; track tipo.UniqueID) {
+          <option [value]="tipo.UniqueID">{{ tipo.Nombre }}</option>
+          }
+        </select>
+      </div>
+      }
+
+      <!-- Tip contextual según perfil -->
+      @if (perfilSeleccionado === 'TEA') {
+      <div class="mb-5 flex gap-2 bg-[#F0F3FF] border border-[#C8D2FF] rounded-xl px-3 py-2.5 text-xs text-[#4A5FC4]">
+        <span>🧩</span>
+        <p><strong>Recuerda (TEA):</strong> el objetivo debe ser concreto, observable y con apoyo visual. Usa el
+          pictograma.</p>
+      </div>
+      }
+      @if (perfilSeleccionado === 'TDAH') {
+      <div class="mb-5 flex gap-2 bg-[#FFF8EE] border border-[#FFD98A] rounded-xl px-3 py-2.5 text-xs text-[#9A6A00]">
+        <span>⚡</span>
+        <p><strong>Recuerda (TDAH):</strong> objetivo corto y alcanzable. El premio debe ser motivador y acordado
+          previamente.</p>
+      </div>
+      }
+
+      <div class="flex gap-2.5 justify-end">
+        <button type="button" (click)="modalAddObjetivo = false"
+          class="bg-white text-[#7A6458] border border-[#EAE0D8] rounded-full px-4 py-2 text-[13px] font-semibold cursor-pointer hover:bg-[#FFF9F4] transition">Cancelar</button>
+        <button type="submit" [ngClass]="{
+    'bg-[#6181ff]': perfilSeleccionado === 'TEA' || !perfilSeleccionado,
+    'bg-[#f5a623]': perfilSeleccionado === 'TDAH'
+  }" class="text-white rounded-full px-5 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">
+          Guardar objetivo
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+}
+
+
+<!-- MODAL LISTA TIPOS -->
+@if (modalTipo) {
+<div class="fixed inset-0 bg-black/40 z-[200] flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl border border-[#EAE0D8] p-7 w-full max-w-[440px]">
+    <div class="flex items-center justify-between mb-5">
+      <span class="text-xl font-extrabold text-[#3D2B1F]">Tipos de Objetivo</span>
+      <button (click)="modalTipo = false"
+        class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <div class="flex flex-col gap-2 max-h-64 overflow-y-auto mb-5">
+      @if (tiposObjetivo.length === 0) {
+      <div class="text-sm text-[#7A6458] text-center py-4">No hay tipos creados aún</div>
+      } @else {
+      @for (tipo of tiposObjetivo; track tipo.UniqueID) {
+      <div class="flex items-center justify-between px-3 py-2.5 rounded-xl border border-[#EAE0D8] bg-[#FFF9F4]">
+        <span class="text-sm font-semibold text-[#3D2B1F]">{{ tipo.Nombre }}</span>
+        <div class="flex gap-2">
+          <button (click)="abrirEditarTipo(tipo)"
+            class="text-[#6181ff] text-xs font-bold hover:underline cursor-pointer">Editar</button>
+          <button (click)="eliminarTipo(tipo.UniqueID)"
+            class="text-red-400 text-xs font-bold hover:text-red-600 cursor-pointer">Eliminar</button>
+        </div>
+      </div>
+      }
+      }
+    </div>
+    <div class="flex justify-between items-center">
+      <button (click)="modalTipo = false; modalAddObjetivo = true"
+        class="text-[11px] text-[#6181ff] font-bold underline cursor-pointer">← Volver</button>
+      <button (click)="abrirAddTipo()"
+        class="bg-[#6181ff] text-white rounded-full px-4 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">＋
+        Nuevo tipo</button>
+    </div>
+  </div>
+</div>
+}
+
+
+<!-- MODAL AÑADIR TIPO -->
+@if (modalAddTipo) {
+<div class="fixed inset-0 bg-black/40 z-[200] flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl border border-[#EAE0D8] p-7 w-full max-w-[440px]">
+    <div class="flex items-center justify-between mb-5">
+      <span class="text-xl font-extrabold text-[#3D2B1F]">＋ Nuevo tipo</span>
+      <button (click)="volverAModalTipo()"
+        class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <form [formGroup]="formTipoObjetivo" (ngSubmit)="anyadirTipo()">
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Nombre <span
+            class="text-[#6181ff]">*</span></label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition"
+          type="text" formControlName="Nombre" placeholder="Ej: Higiene" />
+      </div>
+      <div class="flex gap-2.5 justify-end">
+        <button type="button" (click)="volverAModalTipo()"
+          class="bg-white text-[#7A6458] border border-[#EAE0D8] rounded-full px-4 py-2 text-[13px] font-semibold cursor-pointer hover:bg-[#FFF9F4] transition">Cancelar</button>
+        <button type="submit"
+          class="bg-[#6181ff] text-white rounded-full px-5 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">Guardar
+          tipo</button>
+      </div>
+    </form>
+  </div>
+</div>
+}
+
+
+<!-- MODAL EDITAR TIPO -->
+@if (modalEditTipo) {
+<div class="fixed inset-0 bg-black/40 z-[200] flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl border border-[#EAE0D8] p-7 w-full max-w-[440px]">
+    <div class="flex items-center justify-between mb-5">
+      <span class="text-xl font-extrabold text-[#3D2B1F]">✏️ Editar tipo</span>
+      <button (click)="volverAModalTipo()"
+        class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <form [formGroup]="formUpdateTipoObj" (ngSubmit)="actualizarTipo()">
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Nombre <span
+            class="text-[#6181ff]">*</span></label>
+        <input
+          class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition"
+          type="text" formControlName="Nombre" />
+      </div>
+      <div class="flex gap-2.5 justify-end">
+        <button type="button" (click)="volverAModalTipo()"
+          class="bg-white text-[#7A6458] border border-[#EAE0D8] rounded-full px-4 py-2 text-[13px] font-semibold cursor-pointer hover:bg-[#FFF9F4] transition">Cancelar</button>
+        <button type="submit"
+          class="bg-[#6181ff] text-white rounded-full px-5 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+}

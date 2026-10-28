@@ -1,0 +1,329 @@
+<!-- ------- -->
+<!-- NAVBAR  -->
+<!-- ------- -->
+<nav class="bg-white border-b border-gray-300 px-4 py-1 flex items-center justify-between">
+  <!-- Logo -->
+  <a routerLink="/home" class="flex items-center gap-2">
+    <svg width="150px" viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" class="ml-[-3rem]">
+      <defs>
+        <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#E8E6FF" />
+          <stop offset="100%" stop-color="#9FA8F8" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <ellipse cx="340" cy="80" rx="14" ry="26" fill="#9FA8F8" opacity="0.88" transform="rotate(0, 340, 150)" />
+      <ellipse cx="390" cy="99" rx="14" ry="26" fill="#B8BEF9" opacity="0.88" transform="rotate(45, 340, 150)" />
+      <ellipse cx="410" cy="150" rx="14" ry="26" fill="#9FA8F8" opacity="0.88" transform="rotate(90, 340, 150)" />
+      <ellipse cx="390" cy="201" rx="14" ry="26" fill="#BFC4FA" opacity="0.88" transform="rotate(135, 340, 150)" />
+      <ellipse cx="340" cy="220" rx="14" ry="26" fill="#9FA8F8" opacity="0.88" transform="rotate(180, 340, 150)" />
+      <ellipse cx="290" cy="201" rx="14" ry="26" fill="#B0B7F9" opacity="0.88" transform="rotate(225, 340, 150)" />
+      <ellipse cx="270" cy="150" rx="14" ry="26" fill="#9FA8F8" opacity="0.88" transform="rotate(270, 340, 150)" />
+      <ellipse cx="290" cy="99" rx="14" ry="26" fill="#C5C9FA" opacity="0.88" transform="rotate(315, 340, 150)" />
+      <ellipse cx="340" cy="112" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(22.5, 340, 150)" />
+      <ellipse cx="369" cy="121" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(67.5, 340, 150)" />
+      <ellipse cx="378" cy="150" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(112.5, 340, 150)" />
+      <ellipse cx="369" cy="179" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(157.5, 340, 150)" />
+      <ellipse cx="340" cy="188" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(202.5, 340, 150)" />
+      <ellipse cx="311" cy="179" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(247.5, 340, 150)" />
+      <ellipse cx="302" cy="150" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(292.5, 340, 150)" />
+      <ellipse cx="311" cy="121" rx="8" ry="18" fill="#CFD3FB" opacity="0.75" transform="rotate(337.5, 340, 150)" />
+      <circle cx="340" cy="150" r="44" fill="url(#center-glow)" opacity="0.6" />
+      <circle cx="340" cy="150" r="20" fill="white" opacity="0.95" />
+      <circle cx="340" cy="150" r="17" fill="#9FA8F8" />
+      <circle cx="333" cy="144" r="4" fill="#FFB3C6" />
+      <circle cx="347" cy="144" r="4" fill="#A8E6CF" />
+      <circle cx="340" cy="156" r="4" fill="#FFD6A5" />
+    </svg>
+    <div>
+      <span class="font-semibold text-blue-900 text-xl">Spect</span><span class="font-semibold text-indigo-400 text-xl">Bloom</span>
+    </div>
+  </a>
+
+  <!-- Links centrales -->
+  @if (authService.isLoggedIn() && authService.isFamiliar()) {
+  <ul class="hidden md:flex items-center gap-1 list-none">
+    <li><a href="/home" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Inicio</a></li>
+    <li><a href="/calendario" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Calendario</a></li>
+    <li><a href="/economiaFichas" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Economía de fichas</a></li>
+    <li><a href="/quedadas" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Quedadas</a></li>
+    <li><a href="/diario" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Diario</a></li>
+  </ul>
+  }
+  @if (authService.isLoggedIn() && authService.isComun()) {
+  <ul class="hidden md:flex items-center gap-1 list-none">
+    <li><a routerLink="/home" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Inicio</a></li>
+    <li><a routerLink="/quedadas" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Quedadas</a></li>
+  </ul>
+  }
+  @if (authService.isLoggedIn() && authService.isAdmin()) {
+  <ul class="hidden md:flex items-center gap-1 list-none">
+    <li><a routerLink="/admin" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Panel de administracion</a></li>
+    <li><a routerLink="/quedadas" class="px-4 py-2 rounded-full text-sm font-semibold text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors">Quedadas</a></li>
+  </ul>
+  }
+
+  <!-- Botones derecha -->
+  <div class="flex items-center gap-3">
+    @if (!authService.isLoggedIn()) {
+    <button class="md:block bg-indigo-400 hover:bg-indigo-500 text-white text-sm font-bold px-5 py-2 rounded-full transition-colors" routerLink="/registro">
+      Registrarse
+    </button>
+    } @else if (authService.isAdmin()) {
+    <!-- Admin: solo cerrar sesión -->
+    <button (click)="logout()"
+      class="hidden md:flex items-center gap-2 bg-red-50 hover:bg-red-100 text-red-400 text-sm font-semibold px-4 py-2 rounded-full transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+      </svg>
+      Cerrar sesión
+    </button>
+    } @else {
+    <div class="hidden md:flex items-center gap-3">
+      <button (click)="toggleChat()" class="flex items-center gap-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-400 text-sm font-semibold px-4 py-2 rounded-full transition-colors">
+        Asistente IA
+      </button>
+
+      <!-- Dropdown perfil -->
+      <div class="relative">
+        <button (click)="toggleDropdown()" class="flex items-center gap-2 rounded-full focus:outline-none transition-all">
+          @if (authService.getUser()?.fotoPerfil) {
+          <img [src]="authService.getUser().fotoPerfil" class="w-10 h-10 rounded-full object-cover border-2 border-indigo-100" alt="Foto de perfil" />
+          } @else {
+          <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-xl border-2 border-indigo-100"><i class="fa-solid fa-user text-indigo-500"></i></div>
+          }
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-gray-400 transition-transform" [class.rotate-180]="dropdownOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        @if (dropdownOpen) {
+        <div class="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 py-2 z-50">
+          <div class="px-4 py-3 border-b border-gray-100">
+            <p class="text-xs font-bold text-gray-800 truncate">{{ authService.getUser()?.nombre }}</p>
+            <p class="text-xs text-gray-400 truncate">{{ authService.getUser()?.email }}</p>
+          </div>
+          <div class="py-1">
+            <button (click)="modalGestionKid = true"
+              class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Gestionar infantes
+            </button>
+          </div>
+          <div class="border-t border-gray-100 py-1">
+            <button (click)="logout(); dropdownOpen = false"
+              class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-400 hover:bg-red-50 transition-colors cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    }
+
+    <!-- Dropdown perfil móvil (solo usuarios NO admin) -->
+    @if (authService.isLoggedIn() && !authService.isAdmin()) {
+    <div class="relative md:hidden flex flex-col">
+      <button (click)="toggleDropdown()" class="flex items-center gap-2 rounded-full focus:outline-none transition-all">
+        @if (authService.getUser()?.fotoPerfil) {
+        <img [src]="authService.getUser().fotoPerfil" class="w-10 h-10 rounded-full object-cover border-2 border-indigo-100" alt="Foto de perfil" />
+        } @else {
+        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-xl border-2 border-indigo-100"><i class="fa-solid fa-user text-indigo-500"></i></div>
+        }
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-gray-400 transition-transform" [class.rotate-180]="dropdownOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      @if (dropdownOpen) {
+      <div class="absolute right-0 mt-10 w-56 bg-white rounded-2xl shadow-lg border border-gray-100 py-2 z-50">
+        <div class="px-4 py-3 border-b border-gray-100">
+          <p class="text-xs font-bold text-gray-800 truncate">{{ authService.getUser()?.nombre }}</p>
+          <p class="text-xs text-gray-400 truncate">{{ authService.getUser()?.email }}</p>
+        </div>
+        <div class="py-1">
+          <button (click)="modalGestionKid = true"
+            class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Gestionar infantes
+          </button>
+        </div>
+        <div class="border-t border-gray-100 py-1">
+          <button (click)="logout(); dropdownOpen = false"
+            class="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-400 hover:bg-red-50 transition-colors cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+    <!-- Hamburguesa (solo móvil) -->
+    <button class="md:hidden flex flex-col gap-1 p-1" (click)="toggleMobileMenu()">
+      <span class="block w-5 h-0.5 bg-gray-600 rounded"></span>
+      <span class="block w-5 h-0.5 bg-gray-600 rounded"></span>
+      <span class="block w-5 h-0.5 bg-gray-600 rounded"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Menú móvil -->
+<div [class.hidden]="!mobileMenuOpen" class="md:hidden bg-white border-b border-gray-100">
+  <ul class="flex flex-col px-6 py-3 gap-1 list-none">
+    @if (!authService.isLoggedIn()) {
+    <li><a routerLink="/home" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Inicio</a></li>
+    <li><a routerLink="/quedadas" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Quedadas</a></li>
+    <li class="pt-2">
+      <button routerLink="/registro" class="w-full bg-indigo-400 text-white text-sm font-bold px-5 py-2 rounded-full">Registrarse</button>
+    </li>
+    } @else if (authService.isAdmin()) {
+    <!-- Menú móvil admin: solo cerrar sesión -->
+    <li>
+      <button (click)="logout()" class="w-full bg-red-50 text-red-400 text-sm font-semibold px-4 py-2 rounded-full">
+        Cerrar sesión
+      </button>
+    </li>
+    } @else {
+    <li><a href="/home" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Inicio</a></li>
+    <li><a href="/calendario" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Calendario</a></li>
+    <li><a href="/economiaFichas" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Economía de fichas</a></li>
+    <li><a href="/quedadas" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Quedadas</a></li>
+    <li><a href="/diario" class="block px-3 py-2 rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50">Diario</a></li>
+    <li>
+      <button (click)="toggleChat(); mobileMenuOpen = false" class="w-full text-left block px-3 py-2 rounded-lg text-sm font-semibold text-indigo-400 hover:bg-indigo-50">
+        Asistente IA
+      </button>
+    </li>
+    <li class="flex items-center gap-3 pt-2 border-t border-gray-100 mt-1">
+      <button (click)="logout()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold px-4 py-2 rounded-full transition-colors">
+        Cerrar sesión
+      </button>
+    </li>
+    }
+  </ul>
+</div>
+
+
+<!-- -------- -->
+<!-- MODALES  -->
+<!-- -------- -->
+
+<!-- MODAL AÑADIR KID -->
+<div *ngIf="modalKid" class="fixed inset-0 bg-black/40 z-[200] flex items-end md:items-center justify-center">
+  <div class="bg-white w-full md:max-w-[440px] md:rounded-2xl rounded-t-2xl border border-[#EAE0D8] p-6 md:p-7">
+    <div class="flex items-center justify-between mb-5">
+      <span class="text-xl font-extrabold text-[#3D2B1F]">+ Añadir infante</span>
+      <button (click)="modalKid = false"
+        class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <form [formGroup]="formKid" (ngSubmit)="anyadirKid()">
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Nombre <span class="text-[#6181ff]">*</span></label>
+        <input class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition" type="text" formControlName="Nombre" placeholder="Ej: Lucas" />
+      </div>
+      <div *ngIf="formKid.get('Nombre')?.invalid && formKid.get('Nombre')?.touched" class="error-text">
+        <div *ngIf="formKid.get('Nombre')?.hasError('pattern')" class="text-red-600 text-xs">El nombre contiene caracteres no permitidos</div>
+      </div>
+      <div *ngIf="formKid.get('Nombre')?.invalid && formKid.get('Nombre')?.touched" class="error-text">
+        <div *ngIf="formKid.get('Nombre')?.errors?.['required']" class="text-red-600 text-xs">El nombre es obligatorio</div>
+      </div>
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Apellidos <span class="text-[#6181ff]">*</span></label>
+        <input class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition" type="text" formControlName="Apellidos" />
+      </div>
+      <div *ngIf="formKid.get('Apellidos')?.invalid && formKid.get('Apellidos')?.touched" class="error-text">
+        <div *ngIf="formKid.get('Apellidos')?.hasError('pattern')" class="text-red-600 text-xs">El apellido contiene carácteres no permitidos</div>
+      </div>
+      <div *ngIf="formKid.get('Apellidos')?.invalid && formKid.get('Apellidos')?.touched" class="error-text">
+        <div *ngIf="formKid.get('Apellidos')?.errors?.['required']" class="text-red-600 text-xs">El apellido es obligatorio</div>
+      </div>
+      <div class="mb-5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Fecha de nacimiento <span class="text-[#6181ff]">*</span></label>
+        <input class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition" type="date" formControlName="Fecha_nacimiento" />
+      </div>
+      <div *ngIf="formKid.get('Fecha_nacimiento')?.invalid && formKid.get('Fecha_nacimiento')?.touched" class="error-text">
+        <div *ngIf="formKid.get('Fecha_nacimiento')?.errors?.['required']" class="text-red-600 text-xs">La fecha de nacimiento es obligatoria</div>
+      </div>
+      <div *ngIf="formKid.get('Fecha_nacimiento')?.invalid && formKid.get('Fecha_nacimiento')?.touched" class="error-text">
+        <div *ngIf="formKid.get('Fecha_nacimiento')?.hasError('pattern')" class="text-red-600 text-xs">La fecha no es válida</div>
+      </div>
+      <div class="flex gap-2.5 justify-end">
+        <button type="button" (click)="modalKid = false" class="bg-white text-[#7A6458] border border-[#EAE0D8] rounded-full px-4 py-2 text-[13px] font-semibold cursor-pointer hover:bg-[#FFF9F4] transition">Cancelar</button>
+        <button type="submit" class="bg-[#1D7A5B] text-white rounded-full px-5 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL GESTIONAR KID -->
+<div *ngIf="modalGestionKid" class="fixed inset-0 bg-black/40 z-[200] flex items-end md:items-center justify-center">
+  <div class="bg-white w-full md:max-w-[440px] md:rounded-2xl rounded-t-2xl border border-[#EAE0D8] p-6 md:p-7 max-h-[85dvh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-5">
+      <span class="text-xl font-extrabold text-[#3D2B1F]">Infantes</span>
+      <button (click)="modalGestionKid = false" class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <button (click)="abrirAnadirKid()" class="w-full flex items-center justify-center gap-2 bg-[#6181ff] text-white rounded-xl px-5 py-2.5 text-sm font-bold cursor-pointer hover:opacity-90 transition mb-4">＋ Nuevo infante</button>
+    <div class="flex flex-col gap-2 max-h-64 overflow-y-auto">
+      <div *ngFor="let kid of kids" class="flex items-center justify-between bg-[#FFF9F4] border border-[#EAE0D8] rounded-xl px-4 py-2.5">
+        <span class="text-sm font-semibold text-[#3D2B1F]">{{ kid.Nombre }} {{kid.Apellidos}}, {{ calcularEdad(kid.Fecha_nacimiento) }} años</span>
+        <div class="flex items-center gap-2">
+          <button (click)="abrirEditarKid(kid)" class="w-8 h-8 rounded-full bg-[#E8EDFF] text-[#6181ff] flex items-center justify-center hover:bg-[#6181ff] hover:text-white transition cursor-pointer" title="Editar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.213l-4.5 1.5 1.5-4.5L16.862 3.487z" /></svg>
+          </button>
+          <button (click)="eliminarKid(kid.KidID)" class="w-8 h-8 rounded-full bg-[#FFE8E8] text-red-400 flex items-center justify-center hover:bg-red-400 hover:text-white transition cursor-pointer" title="Eliminar">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6" /></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end mt-5">
+      <button (click)="modalGestionKid = false" class="bg-[#FFF9F4] text-[#7A6458] border border-[#EAE0D8] rounded-full px-5 py-2 text-sm font-semibold cursor-pointer hover:bg-[#EAE0D8] transition">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR KID -->
+<div *ngIf="modalEditarKid" class="fixed inset-0 bg-black/40 z-[200] flex items-end md:items-center justify-center">
+  <div class="bg-white w-full md:max-w-[440px] md:rounded-2xl rounded-t-2xl border border-[#EAE0D8] p-6 md:p-7">
+    <div class="flex items-center justify-between mb-5">
+      <span class="text-xl font-extrabold text-[#3D2B1F]">Editar hijo/a</span>
+      <button (click)="modalEditarKid = false" class="w-8 h-8 rounded-full border border-[#EAE0D8] bg-[#FFF9F4] flex items-center justify-center text-[#7A6458] hover:bg-[#EAE0D8] transition cursor-pointer">✕</button>
+    </div>
+    <form [formGroup]="formUpdateKid" (ngSubmit)="actualizarKid()">
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Nombre <span class="text-[#6181ff]">*</span></label>
+        <input class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition" type="text" formControlName="Nombre" placeholder="Ej: Lucas" />
+      </div>
+      <div class="mb-3.5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Apellidos <span class="text-[#6181ff]">*</span></label>
+        <input class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition" type="text" formControlName="Apellidos" />
+      </div>
+      <div class="mb-5">
+        <label class="block text-[11px] font-bold text-[#7A6458] uppercase tracking-wider mb-1.5">Fecha de nacimiento <span class="text-[#6181ff]">*</span></label>
+        <input class="w-full px-3 py-2.5 border-[1.5px] border-[#EAE0D8] rounded-xl text-sm text-[#3D2B1F] bg-[#FFF9F4] outline-none focus:border-[#6181ff] focus:bg-white transition" type="date" formControlName="Fecha_nacimiento" />
+      </div>
+      <div class="flex gap-2.5 justify-end">
+        <button type="button" (click)="modalEditarKid = false" class="bg-white text-[#7A6458] border border-[#EAE0D8] rounded-full px-4 py-2 text-[13px] font-semibold cursor-pointer hover:bg-[#FFF9F4] transition">Cancelar</button>
+        <button type="submit" class="bg-[#1D7A5B] text-white rounded-full px-5 py-2 text-sm font-bold cursor-pointer hover:opacity-90 transition">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ------------- -->
+<!-- CHAT FLOTANTE -->
+<!-- ------------- -->
+@if (authService.isLoggedIn() && !authService.isAdmin()) {
+  <app-ai-chat [forzarAbierto]="chatAbierto" (cerrado)="chatAbierto = false"></app-ai-chat>
+}

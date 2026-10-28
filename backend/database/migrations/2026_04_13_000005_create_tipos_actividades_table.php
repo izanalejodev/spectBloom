@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('tipos_actividades', function (Blueprint $table) {
+            $table->increments('UniqueID');
+            $table->string('Nombre', 100);
+            $table->string('Color', 7)->default('#6181ff');
+            $table->unsignedBigInteger('id');
+            
+            $table->foreign('id')
+                  ->references('id')
+                  ->on('user');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('tipos_actividades');
+    }
+};

@@ -1,0 +1,112 @@
+# SpectBloom — entorno de desarrollo con Docker
+# Arranque:            docker compose up -d --build
+# Con IA (Ollama):     docker compose --profile ia up -d --build
+#
+#   http://localhost:4200  → Angular (ng serve, recarga en caliente)
+#   http://localhost:8000  → Laravel (API en /api)
+#   http://localhost:8080  → phpMyAdmin
+#   localhost:3307         → MySQL (para DBeaver/HeidiSQL si lo prefieres)
+
+name: spectbloom
+
+x-php: &php
+  build:
+    context: ./docker/php
+    args:
+      UID: ${HOST_UID:-1000}
+      GID: ${HOST_GID:-1000}
+  image: spectbloom-php
+  working_dir: /var/www/html
+  volumes:
+    - ./backend:/var/www/html:z          # :z → necesario por SELinux en Fedora
+  extra_hosts:
+    - "host.docker.internal:host-gateway" # por si usas Ollama instalado fuera de Docker
+  environment:
+    # Estas variables mandan sobre el .env de Laravel, así un .env antiguo de Laragon no rompe nada
+    DB_CONNECTION: mysql
+    DB_HOST: mysql
+    DB_PORT: 3306
+    DB_DATABASE: spectbloom
+    DB_USERNAME: spectbloom
+    DB_PASSWORD: spectbloom
+    SESSION_DRIVER: file
+    OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
+    PHP_CLI_SERVER_WORKERS: 4            # que una petición lenta a la IA no bloquee la API
+
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: spectbloom
+      MYSQL_USER: spectbloom
+      MYSQL_PASSWORD: spectbloom
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"                       # 3307 para no chocar con un MySQL local
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  backend:
+    <<: *php
+    command: ["serve"]
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 120
+      start_period: 10s
+
+  scheduler:                              # ejecuta quedadas:limpiar (routes/console.php)
+    <<: *php
+    command: ["php", "artisan", "schedule:work"]
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  frontend:
+    image: node:22-alpine
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app:z
+    environment:
+      HOME: /tmp
+      NG_CLI_ANALYTICS: "false"
+    ports:
+      - "4200:4200"
+    command: sh -c "[ -d node_modules ] || npm install; npx ng serve --host 0.0.0.0 --port 4200"
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  ollama:                                 # solo arranca con --profile ia
+    image: ollama/ollama:latest
+    profiles: ["ia"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  mysql_data:
+  ollama_data:

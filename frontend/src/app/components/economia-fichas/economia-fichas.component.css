@@ -1,0 +1,23 @@
+/* Ocultar números de día */
+.fc-daygrid-day-number {
+  display: none !important;
+}
+
+/* Días de la semana en mayúscula */
+.fc-col-header-cell-cushion {
+  text-transform: uppercase !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  color: #3D2B1F !important;
+}
+
+/* Celdas más altas para que se vean las estrellas */
+.fc-daygrid-day {
+  min-height: 60px !important;
+}
+
+/* Quitar el borde azul de hoy por defecto */
+.fc-day-today {
+  background: #F3F5FF !important;
+}

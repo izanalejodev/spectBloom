@@ -1,0 +1,11 @@
+<div class="min-h-screen flex flex-col">
+  @if (mostrarNav) {
+    <app-nav></app-nav>
+  }
+  <router-outlet></router-outlet>
+</div>
+@if (mostrarNav) {
+  <app-footer></app-footer>
+}
+
+

@@ -1,0 +1,257 @@
+<div class="px-4 md:px-[10%] py-6 md:py-10">
+
+  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">
+        Diario de <span class="text-indigo-300">{{ kidActivo?.Nombre || 'tu hijo/a' }}</span>
+      </h2>
+      <p class="text-gray-400 mt-1 text-sm">Registra el día a día y observa su evolución.</p>
+
+      <!-- Selector de kid activo -->
+      @if (kids.length > 0) {
+      <div class="flex items-center gap-2 flex-wrap mt-3">
+        @for (kid of kids; track kid.KidID) {
+        <div (click)="seleccionarKid(kid)" [class.bg-[#3a56d4cc]]="kidActivo?.KidID === kid.KidID"
+          [class.bg-white]="kidActivo?.KidID !== kid.KidID"
+          [class.scale-120]="kidActivo?.KidID === kid.KidID"
+          class="flex items-center justify-center gap-2 rounded-full px-4 py-1.5 border border-[#EAE0D8] cursor-pointer transition">
+          <span [class.text-white]="kidActivo?.KidID === kid.KidID" class="text-sm font-bold text-gray-800">{{ kid.Nombre }}</span>
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+
+    <div class="flex items-center gap-3">
+      <button (click)="exportarPDF()" [disabled]="entradas.length === 0"
+        class="flex-1 border border-indigo-200 text-indigo-400 hover:bg-indigo-50 disabled:opacity-40 disabled:cursor-not-allowed text-sm font-bold px-5 py-2.5 rounded-full transition-colors">
+        Exportar PDF
+      </button>
+      <button (click)="abrirModal()"
+        class="flex-1 md:flex-none bg-indigo-300 text-white hover:bg-indigo-500 text-sm font-bold px-4 py-2 md:px-5 md:py-2.5 rounded-full transition-colors whitespace-nowrap">
+        + Nueva entrada
+      </button>
+    </div>
+  </div>
+</div>
+
+<hr class="border-gray-100 mx-[10%]">
+
+<!-- ─── Modal nueva entrada ────────────────────────────── -->
+@if (modalAbierto) {
+<div class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4" (click)="cerrarModal()">
+  <div class="bg-white rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-xl"
+    (click)="$event.stopPropagation()">
+
+    <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+      <h3 class="text-lg font-bold text-gray-800">
+        {{ entradaEditando ? 'Editar entrada' : 'Nueva entrada' }}
+      </h3>
+      <button (click)="cerrarModal()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">✕</button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="guardarEntrada()" class="p-6 space-y-4">
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 mb-1">Fecha *</label>
+        <input formControlName="fecha" type="date"
+          class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-indigo-300 transition-colors">
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 mb-2">¿Cómo fue el día? *</label>
+        <div class="flex gap-3">
+          @for (e of estados; track e.valor) {
+          <button type="button" (click)="form.patchValue({ estado: e.valor })"
+            [style.background-color]="form.get('estado')?.value === e.valor ? e.color : '#f3f4f6'"
+            [style.border-color]="form.get('estado')?.value === e.valor ? e.color : '#e5e7eb'"
+            class="flex-1 py-5 rounded-xl border-2 text-xs font-bold transition-all">
+          </button>
+          }
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 mb-1">¿Cómo fue el día? *</label>
+        <textarea formControlName="descripcion" rows="4"
+          placeholder="Describe cómo estuvo hoy tu hijo/a, qué pasó, cómo se comportó..."
+          class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-indigo-300 transition-colors resize-none"></textarea>
+        @if (form.get('descripcion')?.touched && form.get('descripcion')?.invalid) {
+        <div class="space-y-1 mt-1">
+          @if (form.get('descripcion')?.errors?.['required']) {
+          <p class="text-xs text-red-400">La descripción es obligatoria</p>
+          }
+          @if (form.get('descripcion')?.errors?.['minlength']) {
+          <p class="text-xs text-red-400">La descripción es demasiado corta</p>
+          }
+          @if (form.get('descripcion')?.errors?.['maxlength']) {
+          <p class="text-xs text-red-400">La descripción es demasiado larga</p>
+          }
+          @if (form.get('descripcion')?.errors?.['pattern']) {
+          <p class="text-xs text-red-400">No se permiten caracteres especiales ni numericos</p>
+          }
+        </div>
+        }
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 mb-1">Comportamiento *</label>
+        <div class="flex gap-2 flex-wrap">
+          @for (c of comportamientos; track c) {
+          <button type="button" (click)="toggleComportamiento(c)" [class]="comportamientosSeleccionados.includes(c)
+              ? 'bg-indigo-300 text-white border-indigo-300'
+              : 'bg-white text-gray-500 border-gray-200 hover:border-indigo-200'"
+            class="text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors">
+            {{ c }}
+          </button>
+          }
+        </div>
+
+        @if (comportamientoPulsado && comportamientosSeleccionados.length === 0) {
+        <p class="text-xs text-red-400 mt-1">El comportamiento es obligatorio</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 mb-1">Logros del día *</label>
+        <input formControlName="logros" type="text"
+          placeholder="Ej: Habló con un compañero nuevo, completó todas las actividades..."
+          class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-indigo-300 transition-colors">
+
+        @if (form.get('logros') && form.get('logros')?.touched && form.get('logros')?.invalid) {
+        <div class="space-y-1 mt-1">
+          @if (form.get('logros')?.errors?.['minlength']) {
+          <p class="text-xs text-red-400">Es demasiado corto</p>
+          }
+          @if (form.get('logros')?.errors?.['maxlength']) {
+          <p class="text-xs text-red-400">Es demasiado largo</p>
+          }
+          @if (form.get('logros')?.errors?.['pattern']) {
+          <p class="text-xs text-red-400">No se permiten caracteres especiales ni numericos</p>
+          }
+        </div>
+        }
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-gray-500 mb-1">Notas adicionales</label>
+        <textarea formControlName="notas" rows="2" placeholder="Cualquier observación extra..."
+          class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-800 focus:outline-none focus:border-indigo-300 transition-colors resize-none"></textarea>
+
+        @if (form.get('notas') && form.get('notas')?.touched && form.get('notas')?.invalid) {
+        <div class="space-y-1 mt-1">
+          @if (form.get('notas')?.errors?.['minlength']) {
+          <p class="text-xs text-red-400">Error: TITLE too short</p>
+          }
+          @if (form.get('notas')?.errors?.['maxlength']) {
+          <p class="text-xs text-red-400">Error: TITLE too long</p>
+          }
+          @if (form.get('notas')?.errors?.['pattern']) {
+          <p class="text-xs text-red-400">Error: ESPECIAL or NUMERIC characters are not allowed</p>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="flex gap-3 justify-end pt-2">
+        <button type="button" (click)="cerrarModal()"
+          class="text-gray-400 hover:text-gray-600 text-sm font-semibold px-4 py-2 rounded-full border border-gray-200 transition-colors">
+          Cancelar
+        </button>
+        <button type="submit" [disabled]="form.invalid || guardando"
+          class="bg-indigo-300 text-white hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold px-5 py-2.5 rounded-full transition-colors">
+          {{ guardando ? 'Guardando...' : (entradaEditando ? 'Actualizar' : 'Guardar entrada') }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+}
+
+<!-- ─── Lista de entradas ──────────────────────────────── -->
+<div class="px-[10%] py-10">
+
+  @if (cargando) {
+  <div class="py-10 text-indigo-400 text-sm font-medium">Cargando entradas...</div>
+  }
+
+  @if (!cargando && !kidActivo) {
+  <div class="text-center py-16">
+    <p class="text-gray-600 text-m">No tienes ningún infante registrado aún.</p>
+    <p class="text-gray-500 text-s mt-1">Pulsa sobre tu foto de perfil para gestionarlo</p>
+  </div>
+  }
+
+  @if (!cargando && kidActivo && entradas.length === 0) {
+  <p class="text-center text-gray-400 py-10 text-sm">
+    Aún no hay entradas para {{ kidActivo.Nombre }}.
+  </p>
+  }
+
+  <div class="flex flex-col gap-4">
+    @for (entrada of entradas; track entrada.id) {
+    <article
+      class="bg-white border border-indigo-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+
+      <!-- Franja de color semáforo -->
+      <div class="h-1.5 w-full" [style.background-color]="getColor(entrada.estado)"></div>
+
+      <div class="p-5">
+        <div class="flex items-start justify-between gap-3 mb-3">
+          <div class="flex items-center gap-3">
+            <!-- Punto de color semáforo -->
+            <div class="w-3 h-3 rounded-full shrink-0" [style.background-color]="getColor(entrada.estado)"></div>
+            <div>
+              <p class="text-sm font-bold text-gray-800">{{ formatearFecha(entrada.fecha) }}</p>
+              <p class="text-xs font-semibold mt-0.5" [style.color]="getColor(entrada.estado)"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button (click)="abrirEditar(entrada)" class="text-gray-300 hover:text-indigo-400 transition-colors"
+              title="Editar">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M16.862 3.487a2.25 2.25 0 113.182 3.182L7.5 19.213l-4.5 1.5 1.5-4.5L16.862 3.487z" />
+              </svg>
+            </button>
+            <button (click)="eliminarEntrada(entrada)"
+              class="text-gray-300 hover:text-red-400 transition-colors text-sm" title="Eliminar">✕</button>
+          </div>
+        </div>
+
+        <p class="text-sm text-gray-600 leading-relaxed">{{ entrada.descripcion }}</p>
+
+        @if (entrada.comportamientos?.length > 0) {
+        <div class="flex flex-wrap gap-1.5 mt-3">
+          @for (c of entrada.comportamientos; track c) {
+          <span
+            class="text-xs bg-indigo-50 text-indigo-400 font-semibold px-2.5 py-1 rounded-full border border-indigo-100">
+            {{ c }}
+          </span>
+          }
+        </div>
+        }
+
+        @if (entrada.logros) {
+        <div class="mt-3 bg-green-50 border border-green-100 rounded-xl px-3 py-2">
+          <p class="text-xs font-semibold text-green-500 mb-0.5">Logros</p>
+          <p class="text-xs text-green-700">{{ entrada.logros }}</p>
+        </div>
+        }
+
+        @if (entrada.notas) {
+        <div class="mt-2 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2">
+          <p class="text-xs font-semibold text-gray-400 mb-0.5">Notas</p>
+          <p class="text-xs text-gray-500">{{ entrada.notas }}</p>
+        </div>
+        }
+      </div>
+
+    </article>
+    }
+  </div>
+
+</div>
