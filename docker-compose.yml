@@ -85,7 +85,7 @@ services:
       NG_CLI_ANALYTICS: "false"
     ports:
       - "4200:4200"
-    command: sh -c "[ -d node_modules ] || npm install; npx ng serve --host 0.0.0.0 --port 4200"
+    command: sh -c "[ -d node_modules ] || npm install; npx ng serve --host 0.0.0.0 --port 4200 --poll 2000"
 
   phpmyadmin:
     image: phpmyadmin:5
